@@ -6,6 +6,7 @@ namespace ShareCar.Db.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool Admin { get; set; }
         public long? FacebookId { get; set; }
         public string PictureUrl { get; set; }
     }
