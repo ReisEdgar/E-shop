@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using ShareCar.Db.Entities;
-using ShareCar.Db.Repositories;
-using ShareCar.Dto.Identity;
-using ShareCar.Dto.Identity.Facebook;
+using EShop.Db.Entities;
+using EShop.Db.Repositories;
+using EShop.Dto.Identity;
+using EShop.Dto.Identity.Facebook;
 
-namespace ShareCar.Logic.Identity
+namespace EShop.Logic.Identity
 {
     public class FacebookIdentity : IIdentity
     {

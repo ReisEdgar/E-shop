@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ShareCar.Dto.Identity
+namespace EShop.Dto.Identity
 {
     public class JwtIssuerOptions
     {

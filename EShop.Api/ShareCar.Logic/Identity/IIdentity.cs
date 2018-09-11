@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ShareCar.Dto.Identity;
+using EShop.Dto.Identity;
 
-namespace ShareCar.Logic.Identity
+namespace EShop.Logic.Identity
 {
     public interface IIdentity
     {

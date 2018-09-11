@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ShareCar.Api
+namespace Eshop.Api
 {
     public class Program
     {

@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ShareCar.Db.Repositories;
+using EShop.Db.Repositories;
 
-namespace ShareCar.Api.Controllers
+namespace EShop.Api.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

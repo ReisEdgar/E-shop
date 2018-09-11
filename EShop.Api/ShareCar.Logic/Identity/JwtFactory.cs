@@ -4,9 +4,9 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using ShareCar.Dto.Identity;
+using EShop.Dto.Identity;
 
-namespace ShareCar.Logic.Identity
+namespace EShop.Logic.Identity
 {
     public class JwtFactory : IJwtFactory
     {

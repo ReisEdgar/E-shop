@@ -9,14 +9,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using ShareCar.Api.DI;
-using ShareCar.Api.Middleware;
-using ShareCar.Db;
-using ShareCar.Db.Entities;
-using ShareCar.Dto.Identity;
-using ShareCar.Dto.Identity.Facebook;
+using EShop.Api.DI;
+using EShop.Api.Middleware;
+using EShop.Db;
+using EShop.Db.Entities;
+using EShop.Dto.Identity;
+using AutoMapper;
+using EShop.Logic;
+using EShop.Dto.Identity.Facebook;
 
-namespace ShareCar.Api
+namespace Eshop.Api
 {
     public class Startup
     {
@@ -47,8 +49,8 @@ namespace ShareCar.Api
                 }));
 
             ConfigureAuthentication(services);
-
             services.AddMvc();
+            services.AddAutoMapper();
 
             var applicationContainer = Bootstrapper.AddRegistrationsToDIContainer(services);
 

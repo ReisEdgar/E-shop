@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace ShareCar.Db.Entities
+namespace EShop.Db.Entities
 {
     public class User : IdentityUser
     {

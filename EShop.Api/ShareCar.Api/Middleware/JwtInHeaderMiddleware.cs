@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace ShareCar.Api.Middleware
+namespace EShop.Api.Middleware
 {
     public class JwtInHeaderMiddleware
     {

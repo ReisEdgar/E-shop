@@ -1,11 +1,11 @@
-﻿using ShareCar.Db.Entities;
+﻿using EShop.Db.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EShop.Db.Entities
 {
-    class RepairingHardware
+    public class RepairingHardware
     {
         public HardwareStatus HardwareStatus { get;set;}
         public HardwareCategory HardwareCategory { get; set; }
@@ -15,7 +15,7 @@ namespace EShop.Db.Entities
         public string AdditionalMessage { get; set; }
 
     }
-    internal enum HardwareStatus
+    public internal enum HardwareStatus
     {
         WAITING,
         REPARING,
@@ -23,7 +23,7 @@ namespace EShop.Db.Entities
         WAITING_FOR_PARTS_DELIVERY
 
     }
-    internal enum HardwareCategory
+    public internal enum HardwareCategory
     {
         PC,
         LAPTOP,

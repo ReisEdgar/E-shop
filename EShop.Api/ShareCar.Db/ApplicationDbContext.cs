@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ShareCar.Db.Entities;
+using EShop.Db.Entities;
 
-namespace ShareCar.Db
+namespace EShop.Db
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {

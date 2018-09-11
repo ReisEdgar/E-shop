@@ -1,19 +1,20 @@
-﻿using EShop.Db.Entities;
+﻿using EShop.Dto.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EShop.Db.Entities
+namespace EShop.Dto
 {
-    public class Message
+    public class MessageDto
     {
         public MessageType MessageType { get; set; }
         public string Text;
-        public User Sender;
-        public User Receiver;
+        public UserDto Sender;
+        public UserDto Receiver;
     }
 
-    public enum MessageType {
+    public enum MessageType
+    {
         USER_TO_USER,
         USER_TO_ADMIN_STANDART,
         USER_TO_ADMIN_BROKEN_ITEM,

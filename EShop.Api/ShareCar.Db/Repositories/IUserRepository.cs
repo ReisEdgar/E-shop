@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using ShareCar.Dto.Identity;
-using ShareCar.Dto.Identity.Facebook;
+using EShop.Dto.Identity;
+using EShop.Dto.Identity.Facebook;
 
-namespace ShareCar.Db.Repositories
+namespace EShop.Db.Repositories
 {
     public interface IUserRepository
     {

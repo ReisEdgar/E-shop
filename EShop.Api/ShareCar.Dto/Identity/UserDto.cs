@@ -1,4 +1,4 @@
-﻿namespace ShareCar.Dto.Identity
+﻿namespace EShop.Dto.Identity
 {
     public class UserDto
     {

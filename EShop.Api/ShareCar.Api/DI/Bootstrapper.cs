@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using ShareCar.Db.Repositories;
-using ShareCar.Logic.Identity;
+using EShop.Db.Repositories;
+using EShop.Logic.Identity;
 
-namespace ShareCar.Api.DI
+namespace EShop.Api.DI
 {
     public class Bootstrapper
     {

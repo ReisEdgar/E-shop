@@ -2,11 +2,11 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using ShareCar.Db.Entities;
-using ShareCar.Dto.Identity;
-using ShareCar.Dto.Identity.Facebook;
+using EShop.Db.Entities;
+using EShop.Dto.Identity;
+using EShop.Dto.Identity.Facebook;
 
-namespace ShareCar.Db.Repositories
+namespace EShop.Db.Repositories
 {
     public class UserRepository : IUserRepository
     {

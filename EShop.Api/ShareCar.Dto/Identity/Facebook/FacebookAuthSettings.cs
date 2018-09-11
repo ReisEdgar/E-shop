@@ -1,4 +1,4 @@
-﻿namespace ShareCar.Dto.Identity.Facebook
+﻿namespace EShop.Dto.Identity.Facebook
 {
     public class FacebookAuthSettings
     {

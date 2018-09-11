@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using ShareCar.Db;
+using EShop.Db;
 using System;
 
-namespace ShareCar.Db.Migrations
+namespace EShop.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20180713120436_Initial")]

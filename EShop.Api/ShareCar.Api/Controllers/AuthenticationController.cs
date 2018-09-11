@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShareCar.Dto.Identity;
-using ShareCar.Logic.Identity;
+using EShop.Dto.Identity;
+using EShop.Logic.Identity;
 
-namespace ShareCar.Api.Controllers
+namespace EShop.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     public class AuthenticationController : Controller
