@@ -15,7 +15,7 @@ namespace EShop.Db.Entities
         public string AdditionalMessage { get; set; }
 
     }
-    public internal enum HardwareStatus
+    public enum HardwareStatus
     {
         WAITING,
         REPARING,
@@ -23,7 +23,7 @@ namespace EShop.Db.Entities
         WAITING_FOR_PARTS_DELIVERY
 
     }
-    public internal enum HardwareCategory
+    public enum HardwareCategory
     {
         PC,
         LAPTOP,
