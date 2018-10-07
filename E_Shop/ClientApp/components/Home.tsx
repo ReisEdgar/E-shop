@@ -1,9 +1,55 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
-export class Home extends React.Component<RouteComponentProps<{}>, {}> {
+interface HomeState {
+    signedIn: boolean
+}
+
+export class Home extends React.Component<RouteComponentProps<{}>, HomeState> {
+    constructor() {
+        super();
+        this.state = {
+            signedIn: false
+        }
+        this.loginSuccess = this.loginSuccess.bind(this);
+        this.loginFailure = this.loginFailure.bind(this);
+    }
+
+    public loginSuccess = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+        this.setState({
+            signedIn: true
+        })
+        console.log(response);
+    }
+
+    public loginFailure = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+        console.log(response);
+    }
+
+    public logoutSuccess = () => {
+        this.setState({
+            signedIn: false
+        })
+    }
+
     public render() {
         return <div>
+            {this.state.signedIn ? 
+                <GoogleLogout
+                    buttonText="Logout"
+                    onLogoutSuccess={this.logoutSuccess}
+                >
+                </GoogleLogout> :
+                <GoogleLogin
+                    clientId="377612088819-c48ddabs6r1b3go8dma2hanjms6r7npu.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={this.loginSuccess}
+                    onFailure={this.loginFailure}
+                >
+                    <div className='g-signin2'></div>
+                </GoogleLogin>}
+            
             <h1>Hello, world!</h1>
             <p>Welcome to your new single-page application, built with:</p>
             <ul>
