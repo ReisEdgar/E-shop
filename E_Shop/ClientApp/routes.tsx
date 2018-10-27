@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Route } from 'react-router-dom';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { AdminLTEroot } from './components/AdminLTEroot';
+import { Catalog } from './components/Catalog';
+import { Forum } from './components/Forum';
+import { Help } from './components/Help';
 
-export const routes = <Layout>
-    <Route exact path='/' component={ Home } />
-    <Route path='/counter' component={ Counter } />
-    <Route path='/fetchdata' component={ FetchData } />
-</Layout>;
+export const routes = <AdminLTEroot>
+    <Route exact path='/' component={Catalog} />
+    <Route exact path='/catalog' component={Catalog} />
+    <Route exact path='/forum' component={Forum} />
+    <Route exact path='/help' component={Help} />
+</AdminLTEroot>;

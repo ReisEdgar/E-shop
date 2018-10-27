@@ -1,3 +1,7 @@
+body.custom-font {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
 .main-nav li .glyphicon {
     margin-right: 10px;
 }

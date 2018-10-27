@@ -7,8 +7,9 @@
     "jsx": "react",
     "sourceMap": true,
     "skipDefaultLibCheck": true,
-    "strict": true,
-    "types": ["webpack-env"]
+    "strict": false,
+    "noImplicitAny": false,
+    "types": [ "webpack-env" ]
   },
   "exclude": [
       "bin",

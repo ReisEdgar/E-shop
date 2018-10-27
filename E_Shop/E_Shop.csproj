@@ -27,7 +27,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\AdminLTEComponents\Catalog.tsx" />
+    <None Remove="ClientApp\components\AdminLTEComponents\Footer.tsx" />
+    <None Remove="ClientApp\components\AdminLTEComponents\Header.tsx" />
+    <None Remove="ClientApp\components\AdminLTEComponents\Sidebar.tsx" />
+    <None Remove="ClientApp\components\AdminLTEroot.tsx" />
+    <None Remove="ClientApp\components\Forum.tsx" />
+    <None Remove="ClientApp\components\Help.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Database\Repositories\ConversationRepository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\Help.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Forum.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Catalog.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AdminLTEComponents\Footer.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AdminLTEComponents\Header.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AdminLTEComponents\Sidebar.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AdminLTEroot.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
