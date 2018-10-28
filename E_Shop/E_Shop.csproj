@@ -27,7 +27,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Repositories\ConversationRepository\" />
+    <None Remove="ClientApp\components\AdminMessage.tsx" />
+    <None Remove="ClientApp\components\HardwareItem.tsx" />
+    <None Remove="ClientApp\components\Support.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\AdminMessage.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\HardwareItem.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\Support.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
