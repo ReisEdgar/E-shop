@@ -23,6 +23,11 @@ body.custom-font {
     z-index: 1;
 }
 
+.message-input{
+    width : 400px;
+    height : 150px;
+}
+
 @media (max-width: 767px) {
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     body {
