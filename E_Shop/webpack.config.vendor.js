@@ -10,14 +10,29 @@ module.exports = (env) => {
         resolve: {
             extensions: [ '.js' ]
         },
+        entry: {
+            vendor: [
+                'jquery',
+                'jquery-ui',
+                'imports-loader',
+                'bootstrap',
+                'bootstrap/dist/css/bootstrap.css',
+                'event-source-polyfill',
+                'isomorphic-fetch',
+                'react',
+                'react-dom',
+                'react-router-dom',
+                'admin-lte',
+                'admin-lte/dist/css/AdminLTE.css',
+                'admin-lte/dist/css/skins/_all-skins.css',
+                'admin-lte/bower_components/font-awesome/css/font-awesome.css',
+                'slimscroll/lib/slimscroll.js']
+        },
         module: {
             rules: [
                 { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' },
                 { test: /\.css(\?|$)/, use: extractCSS.extract([ isDevBuild ? 'css-loader' : 'css-loader?minimize' ]) }
             ]
-        },
-        entry: {
-            vendor: ['bootstrap', 'bootstrap/dist/css/bootstrap.css', 'event-source-polyfill', 'isomorphic-fetch', 'react', 'react-dom', 'react-router-dom', 'jquery'],
         },
         output: {
             path: path.join(__dirname, 'wwwroot', 'dist'),
@@ -27,7 +42,7 @@ module.exports = (env) => {
         },
         plugins: [
             extractCSS,
-            new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
+            new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', "window.jQuery": 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.DllPlugin({
                 path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
                 name: '[name]_[hash]'
@@ -37,6 +52,6 @@ module.exports = (env) => {
             })
         ].concat(isDevBuild ? [] : [
             new webpack.optimize.UglifyJsPlugin()
-        ])
+            ])
     }];
 };
