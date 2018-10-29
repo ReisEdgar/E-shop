@@ -23,14 +23,14 @@ export class EditProfile extends React.Component<RouteComponentProps<{}>, {}> {
                             <form role="form">
                                 <div className="box-body">
                                     <div className="form-group">
-                                        <label htmlFor="exampleInputEmail1">E. paštas</label>
+                                        <label htmlFor="exampleInputEmail1">Slapyvardis</label>
                                         <input type="email" className="form-control" id="exampleInputEmail1"
-                                               placeholder="Enter email"/>
+                                               placeholder="Įrašykite forumo slapyvardį"/>
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="exampleInputPassword1">Slaptažodis</label>
-                                        <input type="password" className="form-control" id="exampleInputPassword1"
-                                               placeholder="Password"/>
+                                        <label htmlFor="exampleInputPassword1">Aprašymas</label>
+                                        <textarea  className="form-control" id="exampleInputPassword1"
+                                               placeholder="Parašykite profilio aprašymą"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputFile">Avataras</label>
