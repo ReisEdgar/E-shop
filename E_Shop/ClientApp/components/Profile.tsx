@@ -74,6 +74,22 @@ export class Profile extends React.Component<RouteComponentProps<{}>, {}> {
                         </div>
                     </div>
                 </div>
+                <div className='row'>
+                    <div className='col-sm-12'>
+                        <div className="box box-default">
+                            <div className="box-header with-border">
+                                <h3 className="box-title">Administratoriaus panelė</h3>
+                            </div>
+                            <div className="box-body">
+                                <div className='row'>
+                                    <div className='col-sm-3'>
+                                        <button className='btn btn-lg btn-primary'>Vartotojų lentelė</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </section>
         </div>
