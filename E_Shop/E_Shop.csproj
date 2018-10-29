@@ -44,6 +44,44 @@
     <TypeScriptCompile Include="ClientApp\components\UserSupport.tsx" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\dist\674f50d287a8c48dc19ba404d20fe713.eot" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\89889688147bd7575d6327160d64e760.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\912ec66d7572ff821749319396470bde.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\b06871f281fee6b241d60582ae9369b9.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\avatar.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\avatar04.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\avatar2.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\avatar3.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\avatar5.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\credit\american-express.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\credit\cirrus.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\credit\mastercard.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\credit\mestro.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\credit\paypal.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\credit\paypal2.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\credit\visa.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\default-50x50.gif" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\icons.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\photo1.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\photo2.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\photo3.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\photo4.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user1-128x128.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user2-160x160.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user3-128x128.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user4-128x128.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user5-128x128.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user6-128x128.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user7-128x128.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\img\user8-128x128.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\main.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\main.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\vendor-manifest.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\vendor.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\vendor.js" />
+  </ItemGroup>
+
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

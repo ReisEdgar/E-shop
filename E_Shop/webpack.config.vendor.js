@@ -14,7 +14,6 @@ module.exports = (env) => {
             vendor: [
                 'jquery',
                 'jquery-ui',
-                'imports-loader',
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
                 'event-source-polyfill',
@@ -26,11 +25,25 @@ module.exports = (env) => {
                 'admin-lte/dist/css/AdminLTE.css',
                 'admin-lte/dist/css/skins/_all-skins.css',
                 'admin-lte/bower_components/font-awesome/css/font-awesome.css',
-                'slimscroll/lib/slimscroll.js']
+                'slimscroll/lib/slimscroll.js'],
+            images: [
+                'admin-lte/dist/img/user2-160x160.jpg',
+                'admin-lte/dist/img/user4-128x128.jpg'
+            ]
         },
         module: {
             rules: [
-                { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' },
+                { test: /\.(woff|woff2|eot|ttf|svg)(\?|$)/, use: [{
+                        loader: 'url-loader',
+                        options: {
+                            limit: 100000,
+                            name: 'img/[hash]-[name].[ext]'
+                        }
+                    }] },
+                {
+                    test: /\.(png|jpg)(\?|$)/, use: [{
+                    loader: 'file-loader?name=img/[name].[ext]',
+                    }]},
                 { test: /\.css(\?|$)/, use: extractCSS.extract([ isDevBuild ? 'css-loader' : 'css-loader?minimize' ]) }
             ]
         },
