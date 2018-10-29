@@ -27,13 +27,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\AdminHardwareList.tsx" />
     <None Remove="ClientApp\components\AdminMessage.tsx" />
+    <None Remove="ClientApp\components\AdminMEssageList.tsx" />
+    <None Remove="ClientApp\components\AdminSupport.tsx" />
     <None Remove="ClientApp\components\HardwareItem.tsx" />
+    <None Remove="ClientApp\components\UserSupport.tsx" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\components\AdminHardwareList.tsx" />
     <TypeScriptCompile Include="ClientApp\components\AdminMessage.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AdminMessageList.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\AdminSupport.tsx" />
     <TypeScriptCompile Include="ClientApp\components\HardwareItem.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\UserSupport.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

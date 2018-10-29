@@ -183,7 +183,7 @@ export class Header extends React.Component<{}, HeaderState> {
                                 </ul>
                             </li>
                             {/*<!-- User Account Menu -->*/}
-                            <li className="dropdown user user-menu">
+                            <li className={this.state.selectedPage == 'Profilis' ? 'dropdown user user-menu active' : 'dropdown user user-menu'}>
                                 {/*<!-- Menu Toggle Button -->*/}
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown"
                                    aria-expanded="false">
@@ -200,34 +200,18 @@ export class Header extends React.Component<{}, HeaderState> {
                                              className="img-circle" alt="User Image"/>
 
                                         <p>
-                                            Alexander Pierce - Web Developer
-                                            <small>Member since Nov. 2012</small>
+                                            Alexander Pierce
+                                            <small>Sveiki sugrįžę!</small>
                                         </p>
                                     </li>
-                                    {/*<!-- Menu Body -->*/}
-                                    <li className="user-body">
-                                        <div className="row">
-                                            <div className="col-xs-4 text-center">
-                                                <a href="#">Followers</a>
-                                            </div>
-                                            <div className="col-xs-4 text-center">
-                                                <a href="#">Sales</a>
-                                            </div>
-                                            <div className="col-xs-4 text-center">
-                                                <a href="#">Friends</a>
-                                            </div>
-                                        </div>
-                                        {/*<!-- /.row -->*/}
-                                    </li>
                                     {/*<!-- Menu Footer-->*/}
-                                    <li className="user-footer">
+                                    <li className="user-footer"  onClick={() => { this.updateSelectedPage('Profilis') }}>
                                         <div className="pull-left">
-                                            <a href="#"
-                                               className="btn btn-default btn-flat">Profile</a>
+                                            <Link to="/profile"
+                                               className="btn btn-default btn-flat">Mano profilis</Link>
                                         </div>
                                         <div className="pull-right">
-                                            <a href="#" className="btn btn-default btn-flat">Sign
-                                                out</a>
+                                            <a href="#" className="btn btn-default btn-flat">Atsijungti</a>
                                         </div>
                                     </li>
                                 </ul>
