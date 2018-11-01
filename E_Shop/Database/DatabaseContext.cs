@@ -16,6 +16,7 @@ namespace E_Shop.Database
         public DbSet<Message> Messages { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<RepairingHardware> RepairingHardware { get; set; }
+        public DbSet<User> User { get; set; }
 
     }
 }

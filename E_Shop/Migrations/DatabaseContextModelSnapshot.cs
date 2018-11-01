@@ -26,9 +26,9 @@ namespace E_Shop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Participant1");
+                    b.Property<string>("User1");
 
-                    b.Property<string>("Participant2");
+                    b.Property<string>("User2");
 
                     b.HasKey("Id");
 
@@ -39,6 +39,8 @@ namespace E_Shop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ConversationId");
 
                     b.Property<int>("MessageType");
 
@@ -51,6 +53,8 @@ namespace E_Shop.Migrations
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
 
                     b.ToTable("Messages");
                 });
@@ -75,6 +79,36 @@ namespace E_Shop.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RepairingHardware");
+                });
+
+            modelBuilder.Entity("E_Shop.Database.Entities.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<string>("Nickname");
+
+                    b.Property<string>("Picture");
+
+                    b.Property<int>("Role");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("E_Shop.Database.Entities.Message", b =>
+                {
+                    b.HasOne("E_Shop.Database.Entities.Conversation", "Conversation")
+                        .WithMany()
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

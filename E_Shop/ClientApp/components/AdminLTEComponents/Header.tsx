@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { Link } from "react-router-dom";
 // import { google } from 'googleapis';
-import { GoogleLogin } from 'react-google-login';
+import {GoogleLogin, GoogleLoginResponse} from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
 
 
@@ -20,23 +20,15 @@ export class Header extends React.Component<{}, HeaderState> {
 
     public responseGoogle(response)  {
         console.log(response);
+        var token = response.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', window.location.protocol + '/api/Users/login');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function () {
+            console.log('Signed in as: ' + response.getBasicProfile().getName());
+        };
+        xhr.send(JSON.stringify({ token: token }));
     }
-
-    // public onSignIn(googleUser) {
-    //     var profile = googleUser.getBasicProfile();
-    //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    //     console.log('Name: ' + profile.getName());
-    //     console.log('Image URL: ' + profile.getImageUrl());
-    //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    // }
-    //
-    // public signOut() {
-    //     var auth2 = gapi.auth2.getAuthInstance();
-    //   //  var auth2 = google.auth2.getAuthInstance();
-    //     auth2.signOut().then(function () {
-    //         console.log('User signed out.');
-    //     });
-    // }
 
     public updateSelectedPage(page: string) {
         this.setState({
