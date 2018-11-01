@@ -31,6 +31,11 @@ module.exports = (env) => {
                 'admin-lte/dist/img/user4-128x128.jpg'
             ]
         },
+        node: {
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+        },
         module: {
             rules: [
                 { test: /\.(woff|woff2|eot|ttf|svg)(\?|$)/, use: [{

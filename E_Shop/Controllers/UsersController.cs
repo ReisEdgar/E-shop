@@ -11,6 +11,10 @@ using System.Net.Http;
 using System.Net;
 using Newtonsoft.Json;
 using E_Shop.Dto;
+using E_Shop.Logic;
+using E_Shop.Logic.Interfaces;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
+using Microsoft.Extensions.Primitives;
 
 namespace E_Shop.Controllers
 {
@@ -19,11 +23,14 @@ namespace E_Shop.Controllers
     public class UsersController : Controller
     {
         private readonly DatabaseContext _context;
-        private static readonly HttpClient client = new HttpClient();
+        private readonly IAuthorizationService _authorizationService;
+        private static readonly HttpClient Client = new HttpClient();
+        
 
-        public UsersController(DatabaseContext context)
+        public UsersController(DatabaseContext context, IAuthorizationService authorizationService)
         {
             _context = context;
+            _authorizationService = authorizationService;
         }
 
         [HttpPost("login")]
@@ -36,12 +43,12 @@ namespace E_Shop.Controllers
 
             var values = new Dictionary<string, string>{{ "id_token", data.token }};
             var content = new FormUrlEncodedContent(values);
-            var response = await client.PostAsync("https://www.googleapis.com/oauth2/v3/tokeninfo", content);
+            var response = await Client.PostAsync("https://www.googleapis.com/oauth2/v3/tokeninfo", content);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var contentAsString = await response.Content.ReadAsStringAsync();
                 var googleUser = JsonConvert.DeserializeObject<GoogleUserDto>(contentAsString);
-                var existingUser = await _context.User.SingleOrDefaultAsync(u => u.Email == googleUser.Email);
+                var existingUser = await _context.User.SingleOrDefaultAsync(u => u.Id == googleUser.sub);
                 if (existingUser == null)
                 {
                     User newUser = new User
@@ -59,10 +66,17 @@ namespace E_Shop.Controllers
             }
             return Unauthorized();
         }
+        
+        [HttpGet("current")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var userId = await _authorizationService.GetUserIdByTokenFromRequest(this.Request);
+            return await GetUser(userId);
+        }
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<User> GetUser()
+        public IEnumerable<User> GetUsers()
         {
             return _context.User;
         }

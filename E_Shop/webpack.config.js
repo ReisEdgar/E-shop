@@ -22,6 +22,11 @@ module.exports = (env) => {
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
             ]
         },
+        node: {
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+        },
         plugins: [
             new CheckerPlugin(),
             new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', "window.jQuery": 'jquery' }),

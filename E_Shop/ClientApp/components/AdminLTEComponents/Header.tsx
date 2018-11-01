@@ -1,8 +1,9 @@
 ﻿import * as React from 'react';
 import { Link } from "react-router-dom";
 // import { google } from 'googleapis';
-import {GoogleLogin, GoogleLoginResponse} from 'react-google-login';
+import {GoogleLogin} from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
+import Fetcher from 'request';
 
 
 interface HeaderState {
@@ -14,8 +15,21 @@ export class Header extends React.Component<{}, HeaderState> {
         super();
         this.state = {
             selectedPage: ''
-        }
+        };
         this.responseGoogle = this.responseGoogle.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+    
+    componentDidMount() {
+        console.log(window.sessionStorage.accessToken);
+        Fetcher.get(window.location.origin + '/api/Users/current', {
+            'auth': {
+                'bearer': window.sessionStorage.accessToken || ''
+            }
+
+        })
+        
+        
     }
 
     public responseGoogle(response)  {
@@ -26,8 +40,14 @@ export class Header extends React.Component<{}, HeaderState> {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function () {
             console.log('Signed in as: ' + response.getBasicProfile().getName());
+            window.sessionStorage.accessToken = token;
         };
         xhr.send(JSON.stringify({ token: token }));
+    }
+    
+    public logout() {
+        window.sessionStorage.accessToken = '';
+        console.log('logout');
     }
 
     public updateSelectedPage(page: string) {
@@ -235,7 +255,7 @@ export class Header extends React.Component<{}, HeaderState> {
                                                 render={renderProps => (
                                                     <div className="btn btn-default btn-flat" onClick={renderProps.onClick}>Atsijungti</div>
                                                 )}
-                                                onLogoutSuccess={() => this.responseGoogle}
+                                                onLogoutSuccess={() => this.logout}
                                             >
                                             </GoogleLogout>
                                         </div>

@@ -6,6 +6,8 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using E_Shop.Database;
 using E_Shop.DependencyInjection;
+using E_Shop.Logic;
+using E_Shop.Logic.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -42,7 +44,7 @@ namespace E_Shop
                         .AllowCredentials();
                 }));
 
-
+            services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddMvc();
             services.AddAutoMapper();
 

@@ -51,6 +51,7 @@
     "react-grid-system": "^4.3.1",
     "react-responsive-modal": "^3.4.0",
     "react-simple-flex-grid": "^1.2.3",
+    "request": "^2.88.0",
     "webpack-dev-server": "^3.1.10"
   }
 }
