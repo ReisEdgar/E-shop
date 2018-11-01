@@ -1,5 +1,8 @@
 ﻿import * as React from 'react';
 import { Link } from "react-router-dom";
+// import { google } from 'googleapis';
+import { GoogleLogin } from 'react-google-login';
+import { GoogleLogout } from 'react-google-login';
 
 
 interface HeaderState {
@@ -12,7 +15,28 @@ export class Header extends React.Component<{}, HeaderState> {
         this.state = {
             selectedPage: ''
         }
+        this.responseGoogle = this.responseGoogle.bind(this);
     }
+
+    public responseGoogle(response)  {
+        console.log(response);
+    }
+
+    // public onSignIn(googleUser) {
+    //     var profile = googleUser.getBasicProfile();
+    //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //     console.log('Name: ' + profile.getName());
+    //     console.log('Image URL: ' + profile.getImageUrl());
+    //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    // }
+    //
+    // public signOut() {
+    //     var auth2 = gapi.auth2.getAuthInstance();
+    //   //  var auth2 = google.auth2.getAuthInstance();
+    //     auth2.signOut().then(function () {
+    //         console.log('User signed out.');
+    //     });
+    // }
 
     public updateSelectedPage(page: string) {
         this.setState({
@@ -73,6 +97,16 @@ export class Header extends React.Component<{}, HeaderState> {
                     {/*<!-- /.navbar-collapse -->*/}
                     {/*<!-- Navbar Right Menu -->*/}
                     <div className="navbar-custom-menu">
+                        {/*<div className="g-signin2" data-onsuccess="onSignIn"> </div>*/}
+                        <GoogleLogin
+                            clientId="1062350769792-0847ocfd04iiae2k2jqdqp69umbvjuul.apps.googleusercontent.com"
+                            render={renderProps => (
+                                <div className="g-signin2" onClick={renderProps.onClick}>Palaukite...</div>
+                            )}
+                            buttonText="Login"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
+                        />
                         <ul className="nav navbar-nav">
                             {/*<!-- Messages: style can be found in dropdown.less-->*/}
                             <li className="dropdown messages-menu">
@@ -163,14 +197,7 @@ export class Header extends React.Component<{}, HeaderState> {
                                                     {/*<!-- The progress bar -->*/}
                                                     <div className="progress xs">
                                                         {/*<!-- Change the css width attribute to simulate progress -->*/}
-                                                        <div
-                                                            className="progress-bar progress-bar-aqua"
-                                                            style={width20} role="progressbar"
-                                                            aria-valuenow="20" aria-valuemin="0"
-                                                            aria-valuemax="100">
-                                                            <span
-                                                                className="sr-only">20% Complete</span>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </a>
                                             </li>
@@ -211,7 +238,14 @@ export class Header extends React.Component<{}, HeaderState> {
                                                className="btn btn-default btn-flat">Mano profilis</Link>
                                         </div>
                                         <div className="pull-right">
-                                            <a href="#" className="btn btn-default btn-flat">Atsijungti</a>
+                                            <GoogleLogout
+                                                buttonText="Logout"
+                                                render={renderProps => (
+                                                    <div className="btn btn-default btn-flat" onClick={renderProps.onClick}>Atsijungti</div>
+                                                )}
+                                                onLogoutSuccess={() => this.responseGoogle}
+                                            >
+                                            </GoogleLogout>
                                         </div>
                                     </li>
                                 </ul>
