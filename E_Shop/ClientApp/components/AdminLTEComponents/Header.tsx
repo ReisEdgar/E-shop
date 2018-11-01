@@ -4,32 +4,39 @@ import { Link } from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
 import Fetcher from 'request';
+import User from '../../Classes/User'
 
 
 interface HeaderState {
     selectedPage: string;
+    currentUser: User;
 }
 
 export class Header extends React.Component<{}, HeaderState> {
     constructor(){
         super();
         this.state = {
-            selectedPage: ''
+            selectedPage: '',
+            currentUser: null
         };
         this.responseGoogle = this.responseGoogle.bind(this);
         this.logout = this.logout.bind(this);
     }
     
     componentDidMount() {
-        console.log(window.sessionStorage.accessToken);
+        console.log(window.localStorage.accessToken);
         Fetcher.get(window.location.origin + '/api/Users/current', {
             'auth': {
-                'bearer': window.sessionStorage.accessToken || ''
+                'bearer': window.localStorage.accessToken || ''
             }
-
+        }, (error, response, body) => {
+            if (response.statusCode == 200) {
+                console.log(JSON.parse(body));
+                this.setState({
+                    currentUser: new User(body)
+                })
+            }
         })
-        
-        
     }
 
     public responseGoogle(response)  {
@@ -40,13 +47,13 @@ export class Header extends React.Component<{}, HeaderState> {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function () {
             console.log('Signed in as: ' + response.getBasicProfile().getName());
-            window.sessionStorage.accessToken = token;
+            window.localStorage.accessToken = token;
         };
         xhr.send(JSON.stringify({ token: token }));
     }
     
     public logout() {
-        window.sessionStorage.accessToken = '';
+        window.localStorage.accessToken = '';
         console.log('logout');
     }
 
@@ -255,7 +262,7 @@ export class Header extends React.Component<{}, HeaderState> {
                                                 render={renderProps => (
                                                     <div className="btn btn-default btn-flat" onClick={renderProps.onClick}>Atsijungti</div>
                                                 )}
-                                                onLogoutSuccess={() => this.logout}
+                                                onLogoutSuccess={this.logout}
                                             >
                                             </GoogleLogout>
                                         </div>
