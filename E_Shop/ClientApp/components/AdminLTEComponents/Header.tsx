@@ -1,10 +1,13 @@
 ﻿import * as React from 'react';
 import { Link } from "react-router-dom";
-// import { google } from 'googleapis';
 import {GoogleLogin} from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
 import Fetcher from 'request';
 import User from '../../Classes/User'
+import {MessagesDropdown} from "../HeaderWidgets/MessagesDropdown";
+import {AlertsDropdown} from "../HeaderWidgets/AlertsDropdown";
+import {ShoppingBasketDropdown} from "../HeaderWidgets/ShoppingBasketDropdown";
+import {UserAccountMenu} from "../HeaderWidgets/UserAccountMenu";
 
 
 interface HeaderState {
@@ -20,7 +23,7 @@ export class Header extends React.Component<{}, HeaderState> {
             currentUser: null
         };
         this.responseGoogle = this.responseGoogle.bind(this);
-        this.logout = this.logout.bind(this);
+        this.updateSelectedPage = this.updateSelectedPage.bind(this);
     }
     
     componentDidMount() {
@@ -50,11 +53,6 @@ export class Header extends React.Component<{}, HeaderState> {
             window.localStorage.accessToken = token;
         };
         xhr.send(JSON.stringify({ token: token }));
-    }
-    
-    public logout() {
-        window.localStorage.accessToken = '';
-        console.log('logout');
     }
 
     public updateSelectedPage(page: string) {
@@ -117,158 +115,27 @@ export class Header extends React.Component<{}, HeaderState> {
                     {/*<!-- Navbar Right Menu -->*/}
                     <div className="navbar-custom-menu">
                         {/*<div className="g-signin2" data-onsuccess="onSignIn"> </div>*/}
-                        <GoogleLogin
-                            clientId="1062350769792-0847ocfd04iiae2k2jqdqp69umbvjuul.apps.googleusercontent.com"
-                            render={renderProps => (
-                                <div className="g-signin2" onClick={renderProps.onClick}>Palaukite...</div>
-                            )}
-                            buttonText="Login"
-                            onSuccess={this.responseGoogle}
-                            onFailure={this.responseGoogle}
-                        />
+                       
                         <ul className="nav navbar-nav">
-                            {/*<!-- Messages: style can be found in dropdown.less-->*/}
-                            <li className="dropdown messages-menu">
-                                {/*<!-- Menu toggle button -->*/}
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i className="fa fa-envelope-o"></i>
-                                    <span className="label label-success">4</span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li className="header">You have 4 messages</li>
-                                    <li>
-                                        {/*<!-- inner menu: contains the messages -->*/}
-                                        <ul className="menu">
-                                            <li>{/*<!-- start message -->*/}
-                                                <a href="#">
-                                                    <div className="pull-left">
-                                                        {/*<!-- User Image -->*/}
-                                                        <img src="../../dist/img/user2-160x160.jpg"
-                                                             className="img-circle"
-                                                             alt="User Image"/>
-                                                    </div>
-                                                    {/*<!-- Message title and timestamp -->*/}
-                                                    <h4>
-                                                        Support Team
-                                                        <small><i className="fa fa-clock-o"></i> 5
-                                                            mins
-                                                        </small>
-                                                    </h4>
-                                                    {/*<!-- The message -->*/}
-                                                    <p>Why not buy a new awesome theme?</p>
-                                                </a>
-                                            </li>
-                                            {/*<!-- end message -->*/}
-                                        </ul>
-                                        {/*<!-- /.menu -->*/}
-                                    </li>
-                                    <li className="footer"><a href="#">See All Messages</a></li>
-                                </ul>
-                            </li>
-                            {/*<!-- /.messages-menu -->*/}
-
-                            {/*<!-- Notifications Menu -->*/}
-                            <li className="dropdown notifications-menu">
-                                {/*<!-- Menu toggle button -->*/}
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i className="fa fa-bell-o"></i>
-                                    <span className="label label-warning">10</span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li className="header">You have 10 notifications</li>
-                                    <li>
-                                        {/*<!-- Inner Menu: contains the notifications -->*/}
-                                        <ul className="menu">
-                                            <li>{/*<!-- start notification -->*/}
-                                                <a href="#">
-                                                    <i className="fa fa-users text-aqua"></i> 5 new
-                                                    members joined today
-                                                </a>
-                                            </li>
-                                            {/*<!-- end notification -->*/}
-                                        </ul>
-                                    </li>
-                                    <li className="footer"><a href="#">View all</a></li>
-                                </ul>
-                            </li>
-                            {/*<!-- Tasks Menu -->*/}
-                            <li className="dropdown tasks-menu">
-                                {/*<!-- Menu Toggle Button -->*/}
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i className="fa fa-shopping-cart"></i>
-                                    <span className="label label-danger">9</span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li className="header">Krepšelis</li>
-                                    <li>
-                                        {/*<!-- Inner menu: contains the tasks -->*/}
-                                        <ul className="menu">
-                                            <li>{/*<!-- Task item -->*/}
-                                                <a href="#">
-                                                    {/*<!-- Task title and progress text -->*/}
-                                                    <h3>
-                                                        Design some buttons
-                                                        <small className="pull-right">20%</small>
-                                                    </h3>
-                                                    {/*<!-- The progress bar -->*/}
-                                                    <div className="progress xs">
-                                                        {/*<!-- Change the css width attribute to simulate progress -->*/}
-                                                        
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            {/*<!-- end task item -->*/}
-                                        </ul>
-                                    </li>
-                                    <li className="footer">
-                                        <a href="#">View all tasks</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            {/*<!-- User Account Menu -->*/}
-                            <li className={this.state.selectedPage == 'Profilis' ? 'dropdown user user-menu active' : 'dropdown user user-menu'}>
-                                {/*<!-- Menu Toggle Button -->*/}
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown"
-                                   aria-expanded="false">
-                                    {/*<!-- The user image in the navbar-->*/}
-                                    <img src="../../dist/img/user2-160x160.jpg"
-                                         className="user-image" alt="User Image"/>
-                                    {/*<!-- hidden-xs hides the username on small devices so only the image appears. -->*/}
-                                    <span className="hidden-xs">Alexander Pierce</span>
-                                </a>
-                                <ul className="dropdown-menu">
-                                    {/*<!-- The user image in the menu -->*/}
-                                    <li className="user-header">
-                                        <img src="../../dist/img/user2-160x160.jpg"
-                                             className="img-circle" alt="User Image"/>
-
-                                        <p>
-                                            Alexander Pierce
-                                            <small>Sveiki sugrįžę!</small>
-                                        </p>
-                                    </li>
-                                    {/*<!-- Menu Footer-->*/}
-                                    <li className="user-footer"  onClick={() => { this.updateSelectedPage('Profilis') }}>
-                                        <div className="pull-left">
-                                            <Link to="/profile"
-                                               className="btn btn-default btn-flat">Mano profilis</Link>
-                                        </div>
-                                        <div className="pull-right">
-                                            <GoogleLogout
-                                                buttonText="Logout"
-                                                render={renderProps => (
-                                                    <div className="btn btn-default btn-flat" onClick={renderProps.onClick}>Atsijungti</div>
-                                                )}
-                                                onLogoutSuccess={this.logout}
-                                            >
-                                            </GoogleLogout>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            <MessagesDropdown/>
+                            <AlertsDropdown/>
+                            <ShoppingBasketDropdown/>
+                            {this.state.currentUser != null ? 
+                            <UserAccountMenu
+                                listItemClass={this.state.selectedPage == 'Profilis' ? 'dropdown user user-menu active' : 'dropdown user user-menu'}
+                                updateSelectedPage={this.updateSelectedPage}
+                            /> :
+                            <li>
+                                <GoogleLogin
+                                    clientId="1062350769792-0847ocfd04iiae2k2jqdqp69umbvjuul.apps.googleusercontent.com"
+                                    render={renderProps => (
+                                        <div className="g-signin2" onClick={renderProps.onClick}>Palaukite...</div>
+                                    )}
+                                    buttonText="Login"
+                                    onSuccess={this.responseGoogle}
+                                    onFailure={this.responseGoogle}
+                                /> 
+                            </li>}
                         </ul>
                     </div>
                     {/*<!-- /.navbar-custom-menu -->*/}
