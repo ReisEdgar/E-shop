@@ -18,10 +18,11 @@ namespace E_Shop.Logic
         
         public async Task<string> GetUserIdByTokenFromRequest(HttpRequest request)
         {
-            StringValues values = default(StringValues);
+            StringValues authHeader = default(StringValues);
             var headers = request.Headers;
-            headers.TryGetValue("Authorization", out values);
-            string token = values.FirstOrDefault()?.Split(" ")[1];
+            headers.TryGetValue("Authorization", out authHeader);
+            if (authHeader.FirstOrDefault()?.Split(" ")?.Length < 2) return "";
+            string token = authHeader.FirstOrDefault()?.Split(" ")[1];
             if (token != null)
             {
                 var content = new FormUrlEncodedContent( new Dictionary<string, string>{{ "id_token", token }});
