@@ -113,7 +113,7 @@ export class UserAccountMenu extends React.Component<any, any> {
                         <GoogleLogin
                             clientId="1062350769792-0847ocfd04iiae2k2jqdqp69umbvjuul.apps.googleusercontent.com"
                             render={renderProps => (
-                                <div className="g-signin2" onClick={renderProps.onClick}>Palaukite...</div>
+                                <div className="g-signin2" style={{marginTop: "7px"}} onClick={renderProps.onClick}>Palaukite...</div>
                             )}
                             buttonText="Login"
                             onSuccess={this.responseGoogle}

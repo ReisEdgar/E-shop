@@ -21,7 +21,7 @@ namespace E_Shop.Logic
             StringValues authHeader = default(StringValues);
             var headers = request.Headers;
             headers.TryGetValue("Authorization", out authHeader);
-            if (authHeader.FirstOrDefault()?.Split(" ")?.Length < 2) return "";
+            if (authHeader.FirstOrDefault()?.Split(" ")?.Length < 2) return null;
             string token = authHeader.FirstOrDefault()?.Split(" ")[1];
             if (token != null)
             {
@@ -35,7 +35,7 @@ namespace E_Shop.Logic
                 }
             }
 
-            return "";
+            return null;
         }
     }
 }
