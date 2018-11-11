@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace E_Shop.Database.Entities
+namespace E_Shop.Dto
 {
-    public class RepairingHardware
+    public class HardwareDto
     {
-        public int Id { get; set; }
+        public int ?Id;
         public HardwareStatus HardwareStatus { get; set; }
         public HardwareCategory HardwareCategory { get; set; }
         public string Owner { get; set; }

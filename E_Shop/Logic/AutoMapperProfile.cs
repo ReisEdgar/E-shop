@@ -15,8 +15,8 @@ namespace E_Shop.Logic
             CreateMap<Message, MessageDto>();
             CreateMap<MessageDto, Message>();
 
-            CreateMap<RepairingHardware, RepairingHardwareDto>();
-            CreateMap<RepairingHardwareDto, RepairingHardware>();
+            CreateMap<Hardware, HardwareDto>();
+            CreateMap<HardwareDto, Hardware>();
 
             CreateMap<Conversation, ConversationDto>();
             CreateMap<ConversationDto, Conversation>();

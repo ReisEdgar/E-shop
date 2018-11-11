@@ -13,8 +13,8 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +32,7 @@
     <None Remove="ClientApp\components\AdminMEssageList.tsx" />
     <None Remove="ClientApp\components\AdminSupport.tsx" />
     <None Remove="ClientApp\components\HardwareItem.tsx" />
+    <None Remove="ClientApp\components\UserFetcher.tsx" />
     <None Remove="ClientApp\components\UserSupport.tsx" />
   </ItemGroup>
 
@@ -41,6 +42,7 @@
     <TypeScriptCompile Include="ClientApp\components\AdminMessageList.tsx" />
     <TypeScriptCompile Include="ClientApp\components\AdminSupport.tsx" />
     <TypeScriptCompile Include="ClientApp\components\HardwareItem.tsx" />
+    <TypeScriptCompile Include="ClientApp\components\UserFetcher.tsx" />
     <TypeScriptCompile Include="ClientApp\components\UserSupport.tsx" />
   </ItemGroup>
 

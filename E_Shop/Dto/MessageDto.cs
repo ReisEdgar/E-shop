@@ -13,6 +13,8 @@ namespace E_Shop.Dto
         public string Sender { get; set; }
         public string Receiver { get; set; }
         public bool Seen { get; set; }
+        public DateTime SendingDateTime { get; set; }
+
     }
 
     public enum MessageType

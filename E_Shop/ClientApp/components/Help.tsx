@@ -2,11 +2,23 @@
 import { RouteComponentProps } from 'react-router';
 import { UserSupport } from './UserSupport';
 import { AdminSupport } from './AdminSupport';
-
+import Fetcher from 'request';
+import { fetchCurrentUser } from "./UserFetcher";
 export class Help extends React.Component<RouteComponentProps<{}>, any> {
     constructor(props: any) {
         super(props);
-        this.state = { admin: false };
+        this.state = { user:null, admin: false };
+        this.userAutentificationResponse = this.userAutentificationResponse.bind(this);
+
+    }
+
+    userAutentificationResponse(response) {
+        if (response) {
+            this.setState({ user: response, admin: response.role == 3 });
+        }
+    }
+    componentDidMount() {
+        fetchCurrentUser(this.userAutentificationResponse);
     }
 
     public render() {
@@ -26,7 +38,6 @@ export class Help extends React.Component<RouteComponentProps<{}>, any> {
                     :
                     <UserSupport/>
                 }
-                <button onClick={() => { this.setState({ admin: !this.state.admin }) }}>admin</button>
             </section>
         </div>
     }

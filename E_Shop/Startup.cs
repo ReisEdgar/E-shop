@@ -8,6 +8,7 @@ using E_Shop.Database;
 using E_Shop.DependencyInjection;
 using E_Shop.Logic;
 using E_Shop.Logic.Interfaces;
+using E_Shop.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -79,6 +80,8 @@ namespace E_Shop
             {
                 serviceScope.ServiceProvider.GetService<DatabaseContext>().Database.Migrate();
             }
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
             app.UseMvc(routes =>
