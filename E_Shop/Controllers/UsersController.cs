@@ -70,8 +70,13 @@ namespace E_Shop.Controllers
         [HttpGet("current")]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var userId = await _authorizationService.GetUserIdByTokenFromRequest(this.Request);
-            return await GetUser(userId);
+            var user = await _authorizationService.GetUserByTokenFromRequest(this.Request);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
 
         // GET: api/Users

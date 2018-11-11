@@ -3,10 +3,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using E_Shop.Database;
+using E_Shop.Database.Entities;
 using E_Shop.Dto;
 using E_Shop.Logic.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 
@@ -15,8 +18,14 @@ namespace E_Shop.Logic
     public class AuthorizationService : IAuthorizationService
     {
         private static readonly HttpClient Client = new HttpClient();
+        private readonly DatabaseContext _context;
         
-        public async Task<string> GetUserIdByTokenFromRequest(HttpRequest request)
+        public AuthorizationService(DatabaseContext context)
+        {
+            _context = context;
+        }
+        
+        public async Task<User> GetUserByTokenFromRequest(HttpRequest request)
         {
             StringValues authHeader = default(StringValues);
             var headers = request.Headers;
@@ -31,7 +40,9 @@ namespace E_Shop.Logic
                 {
                     var contentAsString = await response.Content.ReadAsStringAsync();
                     var googleUser = JsonConvert.DeserializeObject<GoogleUserDto>(contentAsString);
-                    return googleUser.sub;
+                    var user = await _context.User.SingleOrDefaultAsync(m => m.Id == googleUser.sub);
+
+                    return user;
                 }
             }
 
