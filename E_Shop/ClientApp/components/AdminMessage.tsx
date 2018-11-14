@@ -1,36 +1,41 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-//import Modal from 'react-responsive-modal';
-
+import axios from "axios";
 export class AdminMessage extends React.Component<any,any> {
     constructor(props) {
         super(props);
-        this.state = {showMessage : false, open : false, buttonText : "Išskleisti"};
+        this.state = {showMessage : false, open : false, buttonText : "Išskleisti", messageInput : ""};
         this.openMessage = this.openMessage.bind(this);
-        //this.onOpenModal = this.onOpenModal.bind(this);
+        this.openClose = this.openClose.bind(this);
 
-      //  this.onCloseModal = this.onCloseModal.bind(this);
+        this.sendResponse = this.sendResponse.bind(this);
 
 
     }
-     /*
-    onOpenModal = () => {
-        var state = this.state;
-        state.open = true;
-        this.setState(state);      
-      };
-     
-    onCloseModal = () =>{
-          var state = this.state;
-          state.open = false;
-          this.setState(state);      };*/
-
+sendResponse (){
+    var config = {
+        headers: {'Authorization': "bearer " + window.localStorage.accessToken}
+   };
+   var message = {AdminMessage: {Text: this.state.messageInput, MessageType:"USER_TO_USER"}, UserMessageId: this.props.id};
+       axios.post('/api/Message/adminresponse', message, config)
+        .then( (response) => {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });   
+        this.openClose(false);
+}
     openClose(value : any) {
         var state: any = this.state;
-
-            state.open = value;
-        
+            state.open = value;       
         this.setState(state);      
+    }
+
+    messageInputChange(event){
+        var state: any = this.state;
+        state.messageInput = event.target.value;       
+        this.setState(state);    
     }
 
     openMessage() {
@@ -56,7 +61,6 @@ export class AdminMessage extends React.Component<any,any> {
                 </p>
                 {this.state.showMessage ?
                     <div>
-                        <span> ---- zinutes----</span>
                         <span>{this.props.message}</span>
 
                     </div>
@@ -77,7 +81,7 @@ export class AdminMessage extends React.Component<any,any> {
                             <textarea className="message-input" >
                     </textarea>
                         <button onClick={() => { this.openClose(false) }}>Uždaryti</button>
-                            <button onClick={() => { this.openClose(false) }}>Siųsti</button>
+                            <button onClick={this.sendResponse}>Siųsti</button>
 
                         </div>
                         : <div></div>

@@ -69,11 +69,30 @@ namespace E_Shop.Controllers
             {
                 return Unauthorized();
             }
+            message.SenderEmail = user.Email;
+            message.SenderId = user.Id;
+
             _messageService.AddMessage(message);
             return Ok();
 
         }
-        
+        // POST: api/Message
+        [HttpPost("adminresponse")]
+        public async Task<IActionResult> AdminResponse([FromBody]AdminMessageResponse response)
+        {
+            var user = await _authorizationService.GetUserByTokenFromRequest(Request);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            response.AdminMessage.SenderEmail = user.Email;
+            response.AdminMessage.SenderId = user.Id;
+
+            _messageService.AdminResponse(response);
+            return Ok();
+
+        }
         // PUT: api/Message/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)

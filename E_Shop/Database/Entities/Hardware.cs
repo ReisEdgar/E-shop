@@ -8,8 +8,8 @@ namespace E_Shop.Database.Entities
     public class Hardware
     {
         public int Id { get; set; }
-        public HardwareStatus HardwareStatus { get; set; }
-        public HardwareCategory HardwareCategory { get; set; }
+        public HardwareStatus Status { get; set; }
+        public HardwareCategory Category { get; set; }
         public string Owner { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

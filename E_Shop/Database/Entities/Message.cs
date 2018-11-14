@@ -10,12 +10,13 @@ namespace E_Shop.Database.Entities
     {
         public int Id { get; set; }
         public MessageType MessageType { get; set; }
-        public int ConversationId { get; set; }
+        public int? ConversationId { get; set; }
         [ForeignKey("ConversationId")]
         public virtual Conversation Conversation { get; set; }
         public string Text { get; set; }
-        public string Sender { get; set; }
-        public string Receiver { get; set; }
+        public string SenderId { get; set; }
+        [ForeignKey("SenderId")]
+        public virtual User Sender { get; set; }
         public bool Seen { get; set; }
         public DateTime SendingDateTime { get; set; }
         }

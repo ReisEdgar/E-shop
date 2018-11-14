@@ -18,6 +18,7 @@ export class Help extends React.Component<RouteComponentProps<{}>, any> {
         }
     }
     componentDidMount() {
+        console.log("parent");
         fetchCurrentUser(this.userAutentificationResponse);
     }
 
@@ -34,9 +35,9 @@ export class Help extends React.Component<RouteComponentProps<{}>, any> {
             <section className="content container-fluid">
                 {this.state.admin 
                     ?
-                    <AdminSupport />
+                    <AdminSupport user = {this.state.user} />
                     :
-                    <UserSupport/>
+                    <UserSupport user = {this.state.user} />
                 }
             </section>
         </div>

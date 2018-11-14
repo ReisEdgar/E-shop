@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace E_Shop.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,21 +24,21 @@ namespace E_Shop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RepairingHardware",
+                name: "HardwareRecords",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AdditionalMessage = table.Column<string>(nullable: true),
+                    Category = table.Column<int>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    HardwareCategory = table.Column<int>(nullable: false),
-                    HardwareStatus = table.Column<int>(nullable: false),
                     Owner = table.Column<string>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: false)
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RepairingHardware", x => x.Id);
+                    table.PrimaryKey("PK_HardwareRecords", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,11 +64,11 @@ namespace E_Shop.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ConversationId = table.Column<int>(nullable: false),
+                    ConversationId = table.Column<int>(nullable: true),
                     MessageType = table.Column<int>(nullable: false),
-                    Receiver = table.Column<string>(nullable: true),
                     Seen = table.Column<bool>(nullable: false),
-                    Sender = table.Column<string>(nullable: true),
+                    SenderId = table.Column<string>(nullable: true),
+                    SendingDateTime = table.Column<DateTime>(nullable: false),
                     Text = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -79,28 +79,39 @@ namespace E_Shop.Migrations
                         column: x => x.ConversationId,
                         principalTable: "Conversations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Messages_User_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_ConversationId",
                 table: "Messages",
                 column: "ConversationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderId",
+                table: "Messages",
+                column: "SenderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "HardwareRecords");
+
+            migrationBuilder.DropTable(
                 name: "Messages");
 
             migrationBuilder.DropTable(
-                name: "RepairingHardware");
+                name: "Conversations");
 
             migrationBuilder.DropTable(
                 name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Conversations");
         }
     }
 }

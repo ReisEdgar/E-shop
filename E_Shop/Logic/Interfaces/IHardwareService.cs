@@ -10,7 +10,7 @@ namespace E_Shop.Logic.Interfaces
     {
         void EditHardwareItem(HardwareDto hadwareItem);
         HardwareDto GetHardwareItemById(int id);
-        List<HardwareDto> GetHardware(HardwareRequestDto request);
+        List<HardwareDto> GetHardware();
         void DeleteHardware(int id);
 
     }

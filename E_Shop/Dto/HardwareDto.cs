@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Shop.Database.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,14 +9,13 @@ namespace E_Shop.Dto
     public class HardwareDto
     {
         public int ?Id;
-        public HardwareStatus HardwareStatus { get; set; }
-        public HardwareCategory HardwareCategory { get; set; }
+        public HardwareStatus Status { get; set; }
+        public HardwareCategory Category { get; set; }
         public string Owner { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
         public string AdditionalMessage { get; set; }
 
-    }
+    }/*
     public enum HardwareStatus
     {
         WAITING,
@@ -35,5 +35,5 @@ namespace E_Shop.Dto
         WII,
         PSP
 
-    }
+    }*/
 }

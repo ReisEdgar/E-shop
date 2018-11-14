@@ -20,7 +20,29 @@ namespace E_Shop.Controllers
             _hardwareService = hardwareService;
             _authorizationService = authorizationService;
         }
+        [HttpGet]
+        public async System.Threading.Tasks.Task<IActionResult> GetHardwareAsync()
+        {
+            var user = await _authorizationService.GetUserByTokenFromRequest(Request);
 
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (user.Role != Database.Entities.UserRole.Admin)
+            {
+                return Forbid();
+            }
+            var result = _hardwareService.GetHardware();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(result);
+            }
+        }
         // GET: api/Hardware/5
         [HttpGet("{id}")]
         public IActionResult GetHardwareById(int id)
@@ -57,7 +79,7 @@ namespace E_Shop.Controllers
         public async System.Threading.Tasks.Task<IActionResult> PostAsync([FromBody]HardwareDto hardware)
         {
             var user = await _authorizationService.GetUserByTokenFromRequest(Request);
-
+         
             if(user == null)
             {
                 return Unauthorized();

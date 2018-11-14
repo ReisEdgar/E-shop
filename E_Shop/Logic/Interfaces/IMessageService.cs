@@ -9,6 +9,7 @@ namespace E_Shop.Logic.Interfaces
     public interface IMessageService
     {
         void AddMessage(MessageDto message);
+        void AdminResponse(AdminMessageResponse response);
         void DeleteMessage(int id);
         MessageDto GetMessageById(int id);
         List<MessageDto> GetMessagesByConversation(string user1, string user2);

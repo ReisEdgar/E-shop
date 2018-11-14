@@ -3,6 +3,7 @@ using E_Shop.Database;
 using E_Shop.Database.Entities;
 using E_Shop.Dto;
 using E_Shop.Logic.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,25 @@ namespace E_Shop.Logic
         public void AddMessage(MessageDto message)
         {
             var toAdd = _mapper.Map<MessageDto, Message>(message);
+            if (toAdd.MessageType != MessageType.USER_TO_ADMIN_STANDART && toAdd.MessageType != MessageType.USER_TO_ADMIN_BROKEN_ITEM)
+            {
+                toAdd.ConversationId = _converstaionService.GetConversationIdByParticipants(message.SenderEmail, message.ReceiverEmail);
+            }
+            toAdd.SendingDateTime = DateTime.Now;
+            _context.Messages.Add(toAdd);
+            _context.SaveChanges();
+        }
 
-            toAdd.ConversationId = _converstaionService.GetConversationIdByParticipants(message.Sender, message.Receiver);
+        public void AdminResponse(AdminMessageResponse response)
+        {
+            var userMessage = _context.Messages.Include(x => x.Sender).FirstOrDefault(x => x.Id == response.UserMessageId);
+            userMessage.MessageType = MessageType.USER_TO_USER;
+            var toAdd = _mapper.Map<MessageDto, Message>(response.AdminMessage);
+            toAdd.ConversationId = _converstaionService.GetConversationIdByParticipants(response.AdminMessage.SenderEmail, userMessage.Sender.Email);
+
+            userMessage.ConversationId = toAdd.ConversationId;
+            userMessage.SendingDateTime = DateTime.Now;
+            toAdd.SendingDateTime = DateTime.Now;
 
             _context.Messages.Add(toAdd);
             _context.SaveChanges();
@@ -42,7 +60,14 @@ namespace E_Shop.Logic
 
         public List<MessageDto> GetAdminMessages()
         {
-            return _mapper.Map<List<Message>, List<MessageDto>>(_context.Messages.Where(x => (x.MessageType == Database.Entities.MessageType.USER_TO_ADMIN_BROKEN_ITEM || x.MessageType == Database.Entities.MessageType.USER_TO_ADMIN_STANDART)).OrderByDescending(x => x.SendingDateTime).ToList());
+            var resp = (_context.Messages.Include(x => x.Sender).Where(x => (x.MessageType == MessageType.USER_TO_ADMIN_BROKEN_ITEM || x.MessageType == MessageType.USER_TO_ADMIN_STANDART)).OrderByDescending(x => x.SendingDateTime).ToList());
+            var dtoResp = _mapper.Map<List<Message>, List<MessageDto>>(resp);
+
+            for(int i = 0; i < resp.Count; i++)
+            {
+                dtoResp[i].SenderEmail = resp[i].Sender.Email;
+            }
+            return dtoResp;
         }
 
         public MessageDto GetMessageById(int id)
@@ -54,9 +79,7 @@ namespace E_Shop.Logic
         {
             int conversationId = _converstaionService.GetConversationIdByParticipants(user1, user2);
 
-            return _mapper.Map<List<Message>, List<MessageDto>>(_context.Messages.Where(x => x.ConversationId == conversationId).OrderBy(x => x.SendingDateTime).ToList());
+            return _mapper.Map<List<Message>, List<MessageDto>>(_context.Messages.Include(x => x.Sender).Where(x => x.ConversationId == conversationId).OrderBy(x => x.SendingDateTime).ToList());
         }
-
-
     }
 }

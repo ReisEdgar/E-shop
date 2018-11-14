@@ -42,15 +42,15 @@ namespace E_Shop.Migrations
 
                     b.Property<string>("AdditionalMessage");
 
+                    b.Property<int>("Category");
+
                     b.Property<DateTime>("EndDate");
-
-                    b.Property<int>("HardwareCategory");
-
-                    b.Property<int>("HardwareStatus");
 
                     b.Property<string>("Owner");
 
                     b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 
@@ -62,15 +62,13 @@ namespace E_Shop.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ConversationId");
+                    b.Property<int?>("ConversationId");
 
                     b.Property<int>("MessageType");
 
-                    b.Property<string>("Receiver");
-
                     b.Property<bool>("Seen");
 
-                    b.Property<string>("Sender");
+                    b.Property<string>("SenderId");
 
                     b.Property<DateTime>("SendingDateTime");
 
@@ -79,6 +77,8 @@ namespace E_Shop.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ConversationId");
+
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
                 });
@@ -109,8 +109,11 @@ namespace E_Shop.Migrations
                 {
                     b.HasOne("E_Shop.Database.Entities.Conversation", "Conversation")
                         .WithMany()
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ConversationId");
+
+                    b.HasOne("E_Shop.Database.Entities.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId");
                 });
 #pragma warning restore 612, 618
         }
