@@ -18,10 +18,10 @@ namespace E_Shop.Database.Entities
     }
     public enum HardwareStatus
     {
-        WAITING,
-        REPARING,
-        REPAIRED,
-        WAITING_FOR_PARTS_DELIVERY
+        Laukia,
+        Taisoma,
+        Sutaisyta//,
+      //  Laukiama daliu pristatymo
 
     }
     public enum HardwareCategory

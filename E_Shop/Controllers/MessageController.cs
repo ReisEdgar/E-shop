@@ -89,7 +89,7 @@ namespace E_Shop.Controllers
             response.AdminMessage.SenderEmail = user.Email;
             response.AdminMessage.SenderId = user.Id;
 
-            _messageService.AdminResponse(response);
+            _messageService.AdminResponse(response);//
             return Ok();
 
         }

@@ -63,21 +63,21 @@ componentDidMount(){
 
         return <div >
                                   <div>
-                            <span>Iveskite taisomos įrangos kodą:</span>
+                            <label>Iveskite taisomos įrangos kodą:</label>
                 <input type="text" onChange={this.handleCodeInputChange} />
 
-                            <button onClick={this.sendCode}> Pateikti</button>
+                            <button className="btn btn-primary" onClick={this.sendCode}> Pateikti</button>
                         </div>
                         {this.props.user?
                         <div>
-                            <span>Parašykite laišką svetainės administracijai:</span>
+                            <label>Parašykite laišką svetainės administracijai:</label>
                             <div>
                     <textarea className="message-input" onChange={this.handleMessageInputChange} >
                     </textarea>
                                 <div>
-                                    <span>Rašoma dėl brokuotos prekės (administracija greičiau atsakys į šią žinutę)</span>
+                                    <label>Rašoma dėl brokuotos prekės (administracija greičiau atsakys į šią žinutę)</label>
                         <input type="checkbox" onChange={this.handleCheckBoxChange}/>
-                        <button onClick={this.sendMessage}> Išsiųsti</button>
+                        <button className="btn btn-success" onClick={this.sendMessage}> Išsiųsti</button>
                                 </div>
 
                             </div>

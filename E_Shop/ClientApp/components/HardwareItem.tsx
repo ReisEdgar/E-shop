@@ -67,24 +67,30 @@ render() {
       };
     return (
       <div>       
-               <Row>
-                <Col span={2}>{this.props.owner}</Col>
-                <Col span={2}>{this.props.category}</Col>
-                <Col span={2}>{this.props.status}</Col>
-                <Col span={2}>{this.props.startDate}</Col>
-                <Col span={2}><button onClick={this.openCreationForm}>Modifikuoti</button></Col>
 
-            </Row>  
+  <div className="row">
+    <div className="col-sm-2" ><label>{this.props.owner}</label></div>
+    <div className="col-sm-2" ><label>{this.props.category}</label></div>
+    <div className="col-sm-2" ><label>{this.props.status}</label></div>
+    <div className="col-sm-2" ><label>{this.props.startDate}</label></div>
+    <div className="col-sm-2" ><button className="btn btn-primary" onClick={this.openCreationForm}>Modifikuoti</button></div>
+
+  </div>
+
             {this.state.open?
             
-            <Row>
+            <div><Row><div className="form-group">
                                                 <Col span={2}>
-                            <span>Savininkas</span>
-                            <input value={this.state.owner} onChange={this.ownerInputChange}/>
+                                                
+
+                            <label>Savininkas</label>
+                            <input type="text" className="form-control" value={this.state.owner} onChange={this.ownerInputChange}/>
                             </Col>  
+
                                                         <Col span={2}>
-                            <span>Kategorija</span>
-                            <select value={this.state.category}  onChange={this.categoryChange} style={myStyle}>
+
+                            <label>Kategorija</label>
+                            <select className="form-control" value={this.state.category}  onChange={this.categoryChange} style={myStyle}>
                             <option value = "PC">PC</option>                
                             <option value = "LAPTOP">LAPTOP</option>
                             <option value = "PLAY_STATION">PLAYSTATION</option>
@@ -96,12 +102,12 @@ render() {
                                 <option value = "PSP">PSP</option>
 
                                 </select>
-                                </Col>    
-
+                                </Col>   
+ 
             <Col span={2}>
-            <span>Statusas</span>
+            <label>Statusas</label>
             
-                            <select onChange={this.statusChange}>
+                            <select className="form-control" onChange={this.statusChange}>
                                 <option value = "WAITING">Laukia eilėje</option>
                                 <option value = "REPARING">Taisoma</option>         
                                 <option value = "REPAIRED">Sutaisyta</option>
@@ -111,17 +117,17 @@ render() {
        
                             <Col span={2}>
   
-                            <span>Pridavimo data</span>
-                            <input value={this.state.startDate} onChange={this.dateInputChange} placeholder = "Pvz.: 2018-03-25"/>
+                            <label>Pridavimo data</label>
+                            <input type="text" className="form-control" value={this.state.startDate} onChange={this.dateInputChange} placeholder = "Pvz.: 2018-03-25"/>
                             </Col>               
-                            <Col span={2}>
-                            <button onClick={this.newHardwareItem}>Išsaugoti</button>
-                            <button onClick={this.openCreationForm}>Uždaryti</button>
-                            </Col>               
+                       
                             <Col span={2}>
                             </Col>               
 
-            </Row>
+           </div> </Row>
+                            <button className="btn btn-success" onClick={this.newHardwareItem}>Išsaugoti</button>
+                            <button className="btn btn-danger" onClick={this.openCreationForm}>Uždaryti</button>
+           </div>
             :<div></div>}
         </div>
     );

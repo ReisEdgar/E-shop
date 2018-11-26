@@ -57,11 +57,11 @@ sendResponse (){
 
                 <div>
                 <p>
-                        <span>{this.props.sender}</span>
+                        <label>{this.props.sender}</label>
                 </p>
                 {this.state.showMessage ?
                     <div>
-                        <span>{this.props.message}</span>
+                        <label>{this.props.message}</label>
 
                     </div>
                     :
@@ -69,19 +69,19 @@ sendResponse (){
 
                     </div>
                 }
-                <button onClick={this.openMessage}>
+                <button className="btn btn-primary" onClick={this.openMessage}>
                     {this.state.buttonText}
     
                 </button>
-                <button onClick={() => { this.openClose(true) }}>Atsakyti</button>
+                <button className="btn btn-primary" onClick={() => { this.openClose(true) }}>Atsakyti</button>
                 {
                     this.state.open 
                         ? <div>
          
-                            <textarea className="message-input" >
+                            <textarea className="form-control"  >
                     </textarea>
-                        <button onClick={() => { this.openClose(false) }}>Uždaryti</button>
-                            <button onClick={this.sendResponse}>Siųsti</button>
+                        <button className="btn btn-danger" onClick={() => { this.openClose(false) }}>Uždaryti</button>
+                            <button className="btn btn-success" onClick={this.sendResponse}>Siųsti</button>
 
                         </div>
                         : <div></div>

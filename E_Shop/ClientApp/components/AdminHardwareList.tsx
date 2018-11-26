@@ -101,30 +101,30 @@ for(var i = 0; i < response.data.length; i++){
 
   render() {
     return (
-        <div><Row>
-                                       <Col span={2}>ddd</Col>
-                                       <Col span={2}>ddd</Col>
-                                       <Col span={2}>ddd</Col>
-                                       <Col span={2}>ddd</Col>
-                       
-                                   </Row>  
+        <div>  <div className="row">
+        <div className="col-sm-2" ><label>Savininkas</label></div>
+        <div className="col-sm-2" ><label>Įrangos kategorija</label></div>
+        <div className="col-sm-2" ><label>Statusas</label></div>
+        <div className="col-sm-2" ><label>Pridavimo data</label></div>
+    
+      </div> 
             {this.state.items ?
-                                       
-                            this.state.items.map(req =>
+<div className="container">
+
+     { this.state.items.map(req =>
                         <div  key={req.id}>
                             <HardwareItem id={req.id} owner={req.owner} startDate={req.startDate} status = {req.status} category = {req.category}  />
-
-                        </div>
-                    )
+     </div>)}
+</div>
                     :<div></div>
                 }
-            <button onClick={this.openCreationForm}> Pridėti naują įrašą </button>
+            <button className="btn btn-primary" onClick={this.openCreationForm}> Pridėti naują įrašą </button>
             {
                 this.state.open
-                    ? <div>
+                    ? <div className="form-group">
                         <p>
-                            <span>Statusas</span>
-                            <select onChange={this.statusChange}>
+                            <label>Statusas</label>
+                            <select className="form-control" onChange={this.statusChange}>
                                 <option value = "WAITING">Laukia eilėje</option>
                                 <option value = "REPARING">Taisoma</option>         
                                 <option value = "REPAIRED">Sutaisyta</option>
@@ -132,8 +132,8 @@ for(var i = 0; i < response.data.length; i++){
 
                             </select>                        </p>
                         <p>
-                            <span>Kategorija</span>
-                            <select onChange={this.categoryChange}>
+                            <label>Kategorija</label>
+                            <select className="form-control" onChange={this.categoryChange}>
                             <option value = "PC">PC</option>                
                             <option value = "LAPTOP">LAPTOP</option>
                             <option value = "PLAY_STATION">PLAYSTATION</option>
@@ -146,13 +146,13 @@ for(var i = 0; i < response.data.length; i++){
 
                                 </select>
                         </p>                        <p>
-                            <span>Savininkas</span>
-                            <input onChange={this.ownerInputChange}/>
+                            <label>Savininkas</label>
+                            <input type="text" className="form-control" onChange={this.ownerInputChange}/>
                         </p>                        <p>
-                            <span>Pridavimo data</span>
-                            <input onChange={this.dateInputChange} placeholder = "Pvz.: 2018-03-25"/>
+                            <label>Pridavimo data</label>
+                            <input type="text" className="form-control" onChange={this.dateInputChange} placeholder = "Pvz.: 2018-03-25"/>
                         </p>
-                        <button onClick={this.newHardwareItem}>Pridėti</button>
+                        <button className="btn btn-success" onClick={this.newHardwareItem}>Pridėti</button>
                     </div>
                     : <div> </div>
 

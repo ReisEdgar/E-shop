@@ -12,11 +12,15 @@ export class AdminSupport extends React.Component<any, any> {
     public render() {
 
         return <div >
-            <form id="admin-support-form" >
-                <input type="radio" onClick={() => { this.setState({ messageList: true }) }} name="content" value="messages" /> Žinutės
-                <input type="radio" onClick={() => { this.setState({ messageList: false }) }} name= "content" value="hardware" /> Taisoma įranga
-                </form>
 
+<form>
+<div className="radio">
+  <label><input onClick={() => { this.setState({ messageList: true }) }} type="radio" name="optradio" />Žinutės</label>
+</div>
+<div className="radio">
+  <label><input onClick={() => { this.setState({ messageList: false }) }} type="radio" name="optradio"/>Taisoma įranga</label>
+</div>
+</form>
 {
  this.state.messageList
  ?   <AdminMessageList/>

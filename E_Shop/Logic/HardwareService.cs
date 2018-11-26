@@ -55,7 +55,7 @@ namespace E_Shop.Logic
 
         public List<HardwareDto> GetHardware()
         {
-            var result = _context.HardwareRecords.Where(x => x.Status != Database.Entities.HardwareStatus.REPAIRED);
+            var result = _context.HardwareRecords.Where(x => x.Status != Database.Entities.HardwareStatus.Sutaisyta);
 
             /* if(request.Owner != null)
              {
