@@ -41,16 +41,30 @@ export class Header extends React.Component<{}, HeaderState> {
                         <ul className="nav navbar-nav">
                             <li className="dropdown">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown"
-                                   aria-expanded="false">Katalogas<span
-                                    className="caret"></span></a>
+                                    aria-expanded="false">Katalogas<span
+                                        className="caret"></span></a>
                                 <ul className="dropdown-menu" role="menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
+                                    <li
+                                        className={this.state.selectedPage == 'Konsoles' ? 'active' : ''}
+                                        onClick={() => { this.updateSelectedPage('Konsoles') }}>
+                                        <Link to="/console">Konsoles</Link>
+                                    </li>
+                                    <li
+                                        className={this.state.selectedPage == 'Žaidimai' ? 'active' : ''}
+                                        onClick={() => { this.updateSelectedPage('Žaidimai') }}>
+                                        <Link to="/games">Žaidimai</Link>
+                                    </li>
                                     <li className="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li className="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
+                                    <li
+                                        className={this.state.selectedPage == 'Ikelti preke' ? 'active' : ''}
+                                        onClick={() => { this.updateSelectedPage('Ikelti preke') }}>
+                                        <Link to="/new">Ikelti preke</Link>
+                                    </li>
+                                    <li
+                                        className={this.state.selectedPage == 'Visos prekes' ? 'active' : ''}
+                                        onClick={() => { this.updateSelectedPage('Visos prekes') }}>
+                                        <Link to="/all">Visos prekes</Link>
+                                    </li>
                                 </ul>
                             </li>
                             <li
