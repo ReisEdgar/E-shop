@@ -9,6 +9,7 @@ import {EditProfile} from "./components/UserComponents/EditProfile";
 import { UserList } from "./components/UserComponents/UserList";
 import { console } from "./components/Console";
 import { games } from "./components/Games";
+import { Newgood } from "./components/Newgood";
 
 export const routes = <AdminLTEroot>
     <Route exact path='/' component={Catalog} />
@@ -20,5 +21,6 @@ export const routes = <AdminLTEroot>
     <Route exact path='/user-list' component={UserList} />
     <Route exact path='/console' component={console} />
     <Route exact path='/games' component={games} />
+    <Route exact path='/Newgood' component={Newgood} />
 
 </AdminLTEroot>;
