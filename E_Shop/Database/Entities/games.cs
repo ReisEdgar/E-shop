@@ -12,11 +12,10 @@ namespace E_Shop.Database.Entities
         public string name { get; set; }
         public string description { get; set; }
         public double price { get; set; }
-        public string city { get; set; }
-        [ForeignKey("location")]
-        public virtual city location { get; set; }
+        public string location { get; set; }
         public GameCategory Gamecategory { get; set; }
         public string phonenumber { get; set; }
+        public int quantity { get; set; }
 
     }
 
@@ -29,8 +28,6 @@ namespace E_Shop.Database.Entities
         Simulation,
         Strategy,
         Sports
-
-
     }
 }
 

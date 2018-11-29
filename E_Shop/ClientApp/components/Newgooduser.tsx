@@ -43,10 +43,7 @@ export class Newgooduser extends React.Component<any, any> {
 
                        <input type="text" onChange={this.handleMessageInputChange} />
             </div>
-               <div>
-                <span>Pažymėkite jeigu esate Įmonė / verslas / komercinė veikla </span>
-                <input type="checkbox" onChange={this.handleCheckBoxChange} />
-                </div>
+            
             <div>
                 <span>Miestas</span>
             </div>
@@ -54,6 +51,15 @@ export class Newgooduser extends React.Component<any, any> {
 
                        <input type="text" onChange={this.handleMessageInputChange} />
             </div>
+                   <div>
+                       <span>Kiekis prekiu</span>
+                       
+            </div>
+            <div>
+                <input type="text" onChange={this.handleMessageInputChange} />
+            </div>
+
+
 
                    <div>
                        <span>Išsaugoti skelbima</span>

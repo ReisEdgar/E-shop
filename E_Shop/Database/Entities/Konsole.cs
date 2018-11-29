@@ -7,7 +7,7 @@ using E_Shop.Dto;
 
 namespace E_Shop.Database.Entities
 {
-    public class Console
+    public class Konsole
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -19,6 +19,7 @@ namespace E_Shop.Database.Entities
         public virtual city location { get; set; }
         public HardwareList HardwareList { get; set; }
         public string phonenumber { get; set; }
+        public int quantity { get; set; }
 
     }
 
@@ -45,8 +46,6 @@ namespace E_Shop.Database.Entities
         NINTENDO_2DS,
         NINTENDO_2DS_NEW,
         NINTENDO_SWITCH
-        
-        
     }
 
 }
