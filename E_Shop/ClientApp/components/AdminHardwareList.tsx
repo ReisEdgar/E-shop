@@ -134,7 +134,7 @@ for(var i = 0; i < response.data.length; i++){
                         <p>
                             <span>Kategorija</span>
                             <select onChange={this.categoryChange}>
-                            <option value = "PC">PC</option>                
+                            <option value = "PC">PC</option>                 
                             <option value = "LAPTOP">LAPTOP</option>
                             <option value = "PLAY_STATION">PLAYSTATION</option>
                                 <option value = "Xbox">Xbox</option>
