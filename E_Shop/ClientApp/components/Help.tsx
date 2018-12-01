@@ -9,7 +9,6 @@ export class Help extends React.Component<RouteComponentProps<{}>, any> {
         super(props);
         this.state = { user:null, admin: false };
         this.userAutentificationResponse = this.userAutentificationResponse.bind(this);
-
     }
 
     userAutentificationResponse(response) {

@@ -18,6 +18,8 @@ namespace E_Shop.Database
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Hardware> HardwareRecords { get; set; }
         public DbSet<User> User { get; set; }
-
+         public DbSet<games> games { get; set; } /*
+            public DbSet<Konsole> Konsole { get; set; }
+            */
     }
 }
