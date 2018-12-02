@@ -17,7 +17,7 @@ export class Newgame extends React.Component<any, any> {
         this.locationChange = this.locationChange.bind(this);
         this.phonenumberChange = this.phonenumberChange.bind(this);
         this.quantityChange = this.quantityChange.bind(this);
-        this.NewGameItem 
+        this.NewGameItem = this.NewGameItem.bind(this);
     }
 
     NewGameItem() {
@@ -143,7 +143,7 @@ export class Newgame extends React.Component<any, any> {
                 <div>Išsaugoti Skelbima</div>
 
             </p>
-            <button className="btn btn-success" onClick={this.NewGameItem}>Pridėti</button>
+            <button className="btn btn-success" onClick={this.NewGameItem}>Išsaugoti</button>
                </div>
     }
 }
