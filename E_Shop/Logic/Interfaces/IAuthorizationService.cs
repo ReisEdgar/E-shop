@@ -7,5 +7,6 @@ namespace E_Shop.Logic.Interfaces
     public interface IAuthorizationService
     {
         Task<User> GetUserByTokenFromRequest(HttpRequest request);
+        /* Task GetUserByTokenFromRequest(object request);*/
     }
 }
