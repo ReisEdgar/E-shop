@@ -28,7 +28,7 @@ namespace E_Shop.Logic
             _context.SaveChanges();
         }
 
-        public gamesDto GetGamesItemById(int id)
+        public gamesDto GetGamesItemById(int id)           
         {
             return _mapper.Map<games, gamesDto>(_context.games.FirstOrDefault(x => x.id == id));
         }

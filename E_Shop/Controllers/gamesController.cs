@@ -1,27 +1,30 @@
-﻿using E_Shop.Dto;
-using E_Shop.Logic.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-
+using System.Threading.Tasks;
+using E_Shop.Logic.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace E_Shop.Controllers
 {
+
     [Produces("application/json")]
     [Route("api/games")]
 
-    public class gamesController
+    public class gamesController : Controller
     {
-        IHardwareService gameService;
-        private readonly Logic.Interfaces.IAuthorizationService _authorizationService;
+        private IgamesService _gamesService;
+        private readonly IAuthorizationService _authorizationService;
         private static readonly HttpClient Client = new HttpClient();
 
-        public gamesController(IHardwareService gameService,
-            Logic.Interfaces.IAuthorizationService authorizationService)
+        public gamesController(IgamesService gameService, IAuthorizationService authorizationService)
         {
-            gameService = gameService;
+            _gamesService = gameService;
             _authorizationService = authorizationService;
         }
 
+       
     }
 }
