@@ -17,4 +17,17 @@ export default class User {
         this.role = parsed.role;
         this.description = parsed.description;
     }
+    
+    getRoleName() {
+        switch (this.role) {
+            case 1:
+                return "Vartotojas";
+            case 2:
+                return "Forumo administratorius";
+            case 3:
+                return "Administratorius";
+            default:
+                return "Vartotojas";
+        }
+    }
 }

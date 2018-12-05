@@ -4,7 +4,7 @@ import { AdminLTEroot } from './components/AdminLTEroot';
 import { Catalog } from './components/Catalog';
 import { Forum } from './components/Forum';
 import { Help } from './components/Help';
-import {Profile} from "./components/UserComponents/Profile";
+import Profile from "./components/UserComponents/Profile";
 import {EditProfile} from "./components/UserComponents/EditProfile";
 import { UserList } from "./components/UserComponents/UserList";
 import { console } from "./components/Console";
