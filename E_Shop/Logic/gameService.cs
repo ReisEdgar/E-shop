@@ -12,13 +12,15 @@ namespace E_Shop.Logic
 {
     public class gameService
     {
-        private readonly IMapper _mapper;
         private readonly DatabaseContext _context;
+        private readonly IMapper _mapper;
+        private readonly IgamesService _gamesService;
 
-        public gameService(IMapper mapper, DatabaseContext databaseContext)
+        public gameService(DatabaseContext context, IMapper mapper, IgamesService gamesService)
         {
+            _context = context;
             _mapper = mapper;
-            _context = databaseContext;
+            _gamesService = gamesService;
         }
 
         public void Deletegame(int id)
