@@ -158,7 +158,7 @@ export class Pc extends React.Component<any, any> {
                                 </button>
                                 <ul className="dropdown-menu" role="menu">
                                   <li>
-                                    <a href="/tema/redaguoti">Redaguoti</a>
+                                    <a href={`/tema/redaguoti/${dynamicData.id}`}>Redaguoti</a>
                                   </li>
                                   <li>
                                     <a href="/tema/redaguoti">Užrakinti</a>
