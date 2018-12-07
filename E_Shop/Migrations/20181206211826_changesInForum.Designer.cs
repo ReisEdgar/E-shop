@@ -4,14 +4,16 @@ using E_Shop.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Shop.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20181206211826_changesInForum")]
+    partial class changesInForum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,8 +62,6 @@ namespace E_Shop.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CategoryID");
 
                     b.Property<string>("Link")
                         .IsRequired();
@@ -164,7 +164,7 @@ namespace E_Shop.Migrations
 
                     b.Property<DateTime>("EditedDate");
 
-                    b.Property<int>("ForumID");
+                    b.Property<int?>("ForumId");
 
                     b.Property<DateTime>("PublishingDate");
 
@@ -179,7 +179,7 @@ namespace E_Shop.Migrations
 
                     b.HasIndex("AuthorID");
 
-                    b.HasIndex("ForumID");
+                    b.HasIndex("ForumId");
 
                     b.ToTable("Posts");
                 });
@@ -235,10 +235,9 @@ namespace E_Shop.Migrations
                         .HasForeignKey("AuthorID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("E_Shop.Database.Entities.Forum", "Forum")
+                    b.HasOne("E_Shop.Database.Entities.Forum")
                         .WithMany("Posts")
-                        .HasForeignKey("ForumID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ForumId");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,7 +2,33 @@
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 
-export class Forum extends React.Component<RouteComponentProps<{}>, {}> {
+export class Forum extends React.Component<any, any> {
+    constructor(props: any) {
+        super(props);
+        this.state = { forums: [] }
+        this.getForums = this.getForums.bind(this);
+    }
+
+    getForums() {
+        this.setState({
+            forumLoader: true
+        });
+        fetch('http://localhost:56147/api/forum')
+            .then(res => {
+                return res.json()
+            })
+            .then(res => {
+                this.setState({
+                    console: console.log(res),
+                    forums: res,
+                    forumLoader: false
+                });
+            });
+    }
+
+    componentDidMount(){
+        this.getForums();
+    }
 
     public render() {
 
@@ -24,22 +50,17 @@ export class Forum extends React.Component<RouteComponentProps<{}>, {}> {
                                 <th>Kategorija</th>
                                 <th style={{ width: "150px" }}>Temų skaičius</th>
                             </tr>
-                                <tr>
-                                    <td><Link to='/forum/konsoles'>Konsolės žaidimai</Link></td>
-                                    <td><span className="badge bg-red">12</span></td>
-                                </tr>
-                                <tr>
-                                    <td><Link to='/forum/pc'>PC žaidimai</Link></td>
-                                    <td><span className="badge bg-yellow">15</span></td>
-                                </tr>
-                                <tr>
-                                    <td><Link to='/forum/iranga'>Įranga</Link></td>
-                                    <td><span className="badge bg-light-blue">7</span></td>
-                                </tr>
-                                <tr>
-                                    <td><Link to='/forum/kita'>Kita</Link></td>
-                                    <td><span className="badge bg-green">25</span></td>
-                                </tr>
+                                {
+                                    this.state.forums.map((dynamicData) =>
+                                        <tr className="trow" key={dynamicData.id} >
+                                            <td>
+                                                <a href={"forum/"+ dynamicData.link}>{dynamicData.title}</a>
+                                            </td>
+                                            <td>
+                                                <span className="badge bg-red">{dynamicData.count}</span>
+                                            </td>
+                                        </tr>
+                                )}
                             </tbody></table>
                     </div>
                 </div>

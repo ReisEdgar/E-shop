@@ -12,6 +12,8 @@ namespace E_Shop.Dto
         public PostCategory Category { get; set; }
         public String Title { get; set; }
         public String Text { get; set; }
+        public String AuthorID { get; set; }
+        public int ForumID { get; set; }
         public DateTime PublishingDate { get; set; }
         public bool Edited { get; set; }
         public DateTime EditedDate { get; set; }
