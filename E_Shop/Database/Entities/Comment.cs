@@ -15,6 +15,9 @@ namespace E_Shop.Database.Entities
         public String Text { get; set; }
         public DateTime Date { get; set; }
 
+        [Required]
+        [ForeignKey("PostID")]
+        public virtual Post Post { get; set; }
         [ForeignKey("AuthorID")]
         public virtual User Author { get; set; }
     }

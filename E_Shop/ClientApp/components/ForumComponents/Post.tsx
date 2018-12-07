@@ -56,7 +56,7 @@ export class Post extends React.Component<any, any> {
             <div className="box-tools pull-right">
               <span className="label label-primary">
                 <a
-                  href="/tema/redaguoti"
+                  href={`/tema/redaguoti/${post.id}`}
                   style={{ color: "white", textDecoration: "none" }}
                 >
                   Redaguoti

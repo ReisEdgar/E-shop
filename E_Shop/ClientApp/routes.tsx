@@ -29,7 +29,7 @@ export const routes = <AdminLTEroot>
     <Route exact path='/forum/iranga' component={Tech} />
     <Route exact path='/forum/kita' component={Other} />
     <Route exact path='/kurti' component={NewPost} />
-    <Route exact path='/tema/redaguoti' component={EditPost} />
+    <Route exact path='/tema/redaguoti/:id' component={EditPost} />
     <Route exact path='/komentaras/redaguoti' component={EditComment} />
     <Route exact path='/tema/:id' component={Post} />
     <Route exact path='/help' component={Help} />

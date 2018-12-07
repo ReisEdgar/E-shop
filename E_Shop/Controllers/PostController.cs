@@ -105,7 +105,28 @@ namespace E_Shop.Controllers
             _context.Add(postt);
             _context.SaveChanges();
             return Ok("prideta");
+        }
 
+        [HttpPut("keisti")]
+        public async Task<IActionResult> EditTopic([FromBody]PostDto post)
+        {
+            var user = await _authorizationService.GetUserByTokenFromRequest(Request);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            int catId = (int)post.Category;
+            Post changedPost = _context.Posts.Where(x => x.Id == post.Id).FirstOrDefault();
+            changedPost.Edited = true;
+            changedPost.EditedDate = post.EditedDate;
+            changedPost.Text = post.Text;
+            changedPost.Title = post.Title;
+            changedPost.Category = (Post.PostCategory)catId;
+            changedPost.ForumID = _context.Forums.Where(x => x.CategoryID == catId).FirstOrDefault().Id;
+            _context.SaveChanges();
+            return Ok("edited");
         }
     }
 }
