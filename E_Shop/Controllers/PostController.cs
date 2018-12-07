@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
+using E_Shop.Database;
 using E_Shop.Database.Entities;
 using E_Shop.Dto;
 using E_Shop.Logic.Interfaces;
@@ -12,32 +13,77 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_Shop.Controllers
 {
-
     [Produces("application/json")]
-    [Route("api/Post")]
+    [Route("api/[controller]")]
     public class PostController : Controller
     {
-        private readonly IMessageService _messageService;
         private readonly IAuthorizationService _authorizationService;
-        private static readonly HttpClient Client = new HttpClient();
+        private readonly DatabaseContext _context;
+        public PostController(DatabaseContext context, IAuthorizationService authorizationService)
+        {
+            _context = context;
+            _authorizationService = authorizationService;
+        }
 
-        // GET: api/Post
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Object> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Posts
+            .Select(x => new
+            {
+                id = x.Id,
+                x.Author,
+                x.Category,
+                x.Edited,
+                x.EditedDate,
+                x.PublishingDate,
+                x.Title,
+                x.Text
+            })
+            .ToList();
+
         }
 
-        // GET: api/Post/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("bycategory")]
+        public IEnumerable<Object> Get(int id)
         {
-            return "value";
+            return _context.Posts
+                .Where(p => (int)p.Category == id)
+            .Select(x => new
+            {
+                id = x.Id,
+                x.Author,
+                x.Category,
+                x.Edited,
+                x.EditedDate,
+                x.PublishingDate,
+                x.Title,
+                x.Text
+            })
+            .ToList();
         }
-        
-        // POST: api/Post
-        /*[HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]PostDto message)
+
+        [HttpGet("byid")]
+        public IActionResult GetById(int id)
+        {
+            var post = _context.Posts
+                .Where(p => (int)p.Id == id)
+                .Select(x => new
+                {
+                    id = x.Id,
+                    x.Author,
+                    x.Category,
+                    x.Edited,
+                    x.EditedDate,
+                    x.PublishingDate,
+                    x.Title,
+                    x.Text
+                })
+            .FirstOrDefault();
+            return Ok(post);
+        }
+        [HttpPost("kurti")]
+        public async Task<IActionResult> PostTopic([FromBody]PostDto post)
         {
             var user = await _authorizationService.GetUserByTokenFromRequest(Request);
 
@@ -45,24 +91,21 @@ namespace E_Shop.Controllers
             {
                 return Unauthorized();
             }
-            message.SenderEmail = user.Email;
-            message.SenderId = user.Id;
 
-            _messageService.AddMessage(message);
-            return Ok();
+            Post postt = new Post();
+            postt.AuthorID = user.Id;
+            postt.Category = (Post.PostCategory)post.Category;
+            postt.Edited = false;
+            postt.EditedDate = post.EditedDate;
+            postt.PublishingDate = post.PublishingDate;
+            postt.Text = post.Text;
+            postt.Title = post.Title;
+            int catId = (int)post.Category;
+            postt.ForumID = _context.Forums.Where(x => x.CategoryID == catId).FirstOrDefault().Id;
+            _context.Add(postt);
+            _context.SaveChanges();
+            return Ok("prideta");
 
-        }*/
-
-        // PUT: api/Post/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

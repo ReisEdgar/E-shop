@@ -15,6 +15,10 @@ namespace E_Shop.Database.Entities
         public String Title { get; set; }
         [StringLength(50)]
         public String Text { get; set; }
+        [Required]
+        public String Link { get; set; }
+        [Required]
+        public int CategoryID { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
     }

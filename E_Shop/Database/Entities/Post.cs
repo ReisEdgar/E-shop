@@ -17,12 +17,19 @@ namespace E_Shop.Database.Entities
         public String Title { get; set; }
         [StringLength(500)]
         public String Text { get; set; }
+        public String AuthorID { get; set; }
+        public int ForumID { get; set; }
+
         public DateTime PublishingDate { get; set; }
         public bool Edited { get; set; }
         public DateTime EditedDate { get; set; }
 
+        [Required]
         [ForeignKey("AuthorID")]
         public virtual User Author { get; set; }
+        [Required]
+        [ForeignKey("ForumID")]
+        public virtual Forum Forum { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
         public enum PostCategory
