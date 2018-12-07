@@ -34,7 +34,7 @@ componentDidMount(){
             {this.state.messages ?
                             this.state.messages.map(req =>
                         <tr  key={req.id}>
-                            <AdminMessage sender={req.senderEmail} message={req.text} id = {req.id} />
+                            <AdminMessage refetch={this.getMessages} sender={req.senderEmail} message={req.text} id = {req.id} />
 
                         </tr>
                     )

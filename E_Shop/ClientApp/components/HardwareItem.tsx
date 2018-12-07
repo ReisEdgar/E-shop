@@ -23,6 +23,7 @@ class HardwareItem extends React.Component<any, any> {
      console.log(hardware);
        axios.post('/api/Hardware', hardware, config)
             .then( (response) => {
+                this.props.refetch();
                 console.log(response);
             })
             .catch(function (error) {
@@ -59,8 +60,6 @@ class HardwareItem extends React.Component<any, any> {
     this.setState(state);    
      }
 
-
-
 render() {   
     var myStyle = {
      width:'140px'
@@ -74,7 +73,6 @@ render() {
     <div className="col-sm-2" ><label>{this.props.status}</label></div>
     <div className="col-sm-2" ><label>{this.props.startDate}</label></div>
     <div className="col-sm-2" ><button className="btn btn-primary" onClick={this.openCreationForm}>Modifikuoti</button></div>
-
   </div>
 
             {this.state.open?
@@ -93,12 +91,11 @@ render() {
                             <select className="form-control" value={this.state.category}  onChange={this.categoryChange} style={myStyle}>
                             <option value = "PC">PC</option>                
                             <option value = "LAPTOP">LAPTOP</option>
-                            <option value = "PLAY_STATION">PLAYSTATION</option>
+                            <option value = "PS">PLAYSTATION</option>
                                 <option value = "Xbox">Xbox</option>
                                 <option value = "NINTENDO">NINTENDO</option>
                                 <option value = "KINECT">KINECT</option>
                                 <option value = "WII">PS3</option>
-                                <option value = "PS4">PS4</option>
                                 <option value = "PSP">PSP</option>
 
                                 </select>
@@ -107,11 +104,10 @@ render() {
             <Col span={2}>
             <label>Statusas</label>
             
-                            <select className="form-control" onChange={this.statusChange}>
-                                <option value = "WAITING">Laukia eilėje</option>
-                                <option value = "REPARING">Taisoma</option>         
-                                <option value = "REPAIRED">Sutaisyta</option>
-                                <option value = "WAITING_FOR_PARTS_DELIVERY">Laukiama nauju detalių</option>                       
+                            <select className="form-control" value={this.state.status} onChange={this.statusChange}>
+                                <option value = "Laukia">Laukia</option>
+                                <option value = "Taisoma">Taisoma</option>         
+                                <option value = "Sutaisyta">Sutaisyta</option>
                             </select>         
                             </Col>                                                  
        

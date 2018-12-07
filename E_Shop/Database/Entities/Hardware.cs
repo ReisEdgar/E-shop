@@ -28,7 +28,7 @@ namespace E_Shop.Database.Entities
     {
         PC,
         LAPTOP,
-        PLAY_STATION,
+        PS,
         XBOX,
         NINTENDO,
         KINECT,

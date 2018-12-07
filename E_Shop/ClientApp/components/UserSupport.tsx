@@ -3,7 +3,7 @@ import axios from "axios";
 export class UserSupport extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
-        this.state = { user: null, admin: false, codeInput :"", messageInput: "", checkboxInput : false }
+        this.state = { textarea:null, user: null, admin: false, display:false, exists : false, owner : "", status: "", date: "", category : "", codeInput :"", messageInput: "", checkboxInput : false }
         this.sendCode = this.sendCode.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
         this.handleCodeInputChange = this.handleCodeInputChange.bind(this);
@@ -13,6 +13,7 @@ export class UserSupport extends React.Component<any, any> {
     handleMessageInputChange(event) {
         var state:any = this.state;
         state.messageInput = event.target.value;
+        state.textarea = event.target;
         this.setState(state);
     }
 
@@ -22,7 +23,6 @@ export class UserSupport extends React.Component<any, any> {
         this.setState(state);
     }
 
-
     handleCodeInputChange(event) {
         var state:any = this.state;
         state.codeInput = event.target.value;
@@ -31,11 +31,36 @@ export class UserSupport extends React.Component<any, any> {
 
     sendCode() {
         axios.get('/api/Hardware/' + this.state.codeInput)
-            .then(function (response) {
+            .then( (response) => {
                 console.log(response);
+            var state: any = this.state;
+                if(response.status === 200){
+                    var statuses =['Laukia',
+'Taisoma',
+'Sutaisyta']
+var cat = ['PC',
+    'LAPTOP',
+    'PLAYSTATION',
+    'XBOX',
+    'NINTENDO',
+    'KINECT',
+    'WII',
+    'PSP'];
+state.exists = true;
+                    state.category = cat[ response.data.category];
+                    state.status = statuses[ response.data.status];
+                    state.display = true;
+                    state.owner = response.data.owner;
+                    state.date = response.data.date;
+                    this.setState(state);
+                }
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch((error) => {
+                var state :any = this.state;
+                state.exists = false;
+                state.display = true;
+                this.setState(state);
+                          console.log(error);
             });   
          }
 
@@ -48,7 +73,8 @@ export class UserSupport extends React.Component<any, any> {
                     console.log(messageType);
              axios.post('/api/Message', message,config
             )
-              .then(function (response) {
+              .then((response) => {
+                  this.state.textarea.value = "";
                 console.log(response);
               })
               .catch(function (error) {
@@ -65,7 +91,22 @@ componentDidMount(){
                                   <div>
                             <label>Iveskite taisomos įrangos kodą:</label>
                 <input type="text" onChange={this.handleCodeInputChange} />
-
+{this.state.display
+    ?(
+        this.state.exists
+        ?  <div className="row">
+        <div className="col-sm-2" ><label>{this.state.owner}</label></div>
+        <div className="col-sm-2" ><label>{this.state.category}</label></div>
+        <div className="col-sm-2" ><label>{this.state.status}</label></div>
+        <div className="col-sm-2" ><label>{this.state.startDate}</label></div>
+    
+      </div>
+      :<div>
+    <label>Irašas nerastas</label>
+    </div>
+    )
+    :<div></div>
+}
                             <button className="btn btn-primary" onClick={this.sendCode}> Pateikti</button>
                         </div>
                         {this.props.user?

@@ -6,7 +6,7 @@ import HardwareItem from './HardwareItem';
 export class AdminHardwareList extends React.Component<any,any> {
   constructor(props) {
       super(props);    
-      this.state = {open: false, status:"WAITING", category:"XBOX", owner:"", date:"", items:null};
+      this.state = {open: false, status:"Laukia", category:"PC", owner:"", date:"", items:null};
       this.newHardwareItem = this.newHardwareItem.bind(this);
       this.statusChange = this.statusChange.bind(this);
       this.categoryChange = this.categoryChange.bind(this);
@@ -39,6 +39,7 @@ this.setState(state);
            }
 
     statusChange(event){        
+        console.log(event)
         var state: any = this.state;
             state.status = event.target.value;       
         this.setState(state);      
@@ -61,7 +62,7 @@ this.setState(state);
     this.setState(state);      
     }
 
-componentDidMount(){
+fetchData(){
     var config = {
         headers: {'Authorization': "bearer " + window.localStorage.accessToken}
    };
@@ -72,13 +73,12 @@ componentDidMount(){
         .then( (response) => {
             var state: any = this.state;
 
-var statuses =['WAITING',
-'REPARING',
-'REPAIRED',
-'WAITING_FOR_PARTS_DELIVERY'];
+var statuses =['Laukia',
+'Taisoma',
+'Sutaisyta']
 var cat = ['PC',
     'LAPTOP',
-    'PLAY_STATION',
+    'PLAYSTATION',
     'XBOX',
     'NINTENDO',
     'KINECT',
@@ -99,6 +99,10 @@ for(var i = 0; i < response.data.length; i++){
         });   
 }
 
+componentDidMount(){
+    this.fetchData(); 
+}
+
   render() {
     return (
         <div>  <div className="row">
@@ -113,7 +117,7 @@ for(var i = 0; i < response.data.length; i++){
 
      { this.state.items.map(req =>
                         <div  key={req.id}>
-                            <HardwareItem id={req.id} owner={req.owner} startDate={req.startDate} status = {req.status} category = {req.category}  />
+                            <HardwareItem refetch={this.fetchData()} id={req.id} owner={req.owner} startDate={req.startDate} status = {req.status} category = {req.category}  />
      </div>)}
 </div>
                     :<div></div>
@@ -125,10 +129,9 @@ for(var i = 0; i < response.data.length; i++){
                         <p>
                             <label>Statusas</label>
                             <select className="form-control" onChange={this.statusChange}>
-                                <option value = "WAITING">Laukia eilėje</option>
-                                <option value = "REPARING">Taisoma</option>         
-                                <option value = "REPAIRED">Sutaisyta</option>
-                                <option value = "WAITING_FOR_PARTS_DELIVERY">Laukiama nauju detalių</option>                       
+                                <option value = "Laukia">Laukia eilėje</option>
+                                <option value = "Taisoma">Taisoma</option>         
+                                <option value = "Sutaisyta">Sutaisyta</option>
 
                             </select>                        </p>
                         <p>
@@ -136,12 +139,11 @@ for(var i = 0; i < response.data.length; i++){
                             <select className="form-control" onChange={this.categoryChange}>
                             <option value = "PC">PC</option>                
                             <option value = "LAPTOP">LAPTOP</option>
-                            <option value = "PLAY_STATION">PLAYSTATION</option>
+                            <option value = "PS">PLAYSTATION</option>
                                 <option value = "Xbox">Xbox</option>
                                 <option value = "NINTENDO">NINTENDO</option>
                                 <option value = "KINECT">KINECT</option>
                                 <option value = "WII">PS3</option>
-                                <option value = "PS4">PS4</option>
                                 <option value = "PSP">PSP</option>
 
                                 </select>

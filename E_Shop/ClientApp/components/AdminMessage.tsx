@@ -20,6 +20,7 @@ sendResponse (){
        axios.post('/api/Message/adminresponse', message, config)
         .then( (response) => {
             console.log(response);
+            this.props.refetch();
         })
         .catch(function (error) {
             console.log(error);
@@ -66,7 +67,6 @@ sendResponse (){
                     </div>
                     :
                     <div>
-
                     </div>
                 }
                 <button className="btn btn-primary" onClick={this.openMessage}>
@@ -78,7 +78,7 @@ sendResponse (){
                     this.state.open 
                         ? <div>
          
-                            <textarea className="form-control"  >
+                            <textarea className="message-input">
                     </textarea>
                         <button className="btn btn-danger" onClick={() => { this.openClose(false) }}>Uždaryti</button>
                             <button className="btn btn-success" onClick={this.sendResponse}>Siųsti</button>

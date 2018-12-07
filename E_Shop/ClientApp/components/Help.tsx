@@ -7,13 +7,13 @@ import { fetchCurrentUser } from "./UserFetcher";
 export class Help extends React.Component<RouteComponentProps<{}>, any> {
     constructor(props: any) {
         super(props);
-        this.state = { user:null, admin: false };
+        this.state = { user:null, admin: false, loaded : false };
         this.userAutentificationResponse = this.userAutentificationResponse.bind(this);
     }
 
     userAutentificationResponse(response) {
         if (response) {
-            this.setState({ user: response, admin: response.role == 3 });
+            this.setState({ user: response, admin: response.role == 3, loaded : true});
         }
     }
     componentDidMount() {
@@ -32,11 +32,15 @@ export class Help extends React.Component<RouteComponentProps<{}>, any> {
             </section>
 
             <section className="content container-fluid">
-                {this.state.admin 
+            {this.state.loaded 
+              ?
+               ( this.state.admin 
                     ?
                     <AdminSupport user = {this.state.user} />
                     :
-                    <UserSupport user = {this.state.user} />
+                    <UserSupport user = {this.state.user} />)
+                    :
+                    <div></div>
                 }
             </section>
         </div>
