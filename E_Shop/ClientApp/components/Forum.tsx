@@ -6,7 +6,6 @@ export class Forum extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = { forums: [] }
-        //orumLoader: false
         this.getForums = this.getForums.bind(this);
     }
 
@@ -30,24 +29,6 @@ export class Forum extends React.Component<any, any> {
     componentDidMount(){
         this.getForums();
     }
-
-    /*public render() {
-
-        return (
-            <table className="table table-bordered">
-                <tr><th>name</th><th>year</th></tr>
-                {
-                    this.state.forums.map((dynamicData) =>
-                        <tr className="trow"> <td>  {dynamicData.title}
-                        </td>
-                        </tr>
-                    )}
-            </table>
-
-
-        )
-    }*/
-
 
     public render() {
 
@@ -76,7 +57,7 @@ export class Forum extends React.Component<any, any> {
                                                 <a href={"forum/"+ dynamicData.link}>{dynamicData.title}</a>
                                             </td>
                                             <td>
-                                                <span className="badge bg-red">neveikia</span>
+                                                <span className="badge bg-red">{dynamicData.count}</span>
                                             </td>
                                         </tr>
                                 )}

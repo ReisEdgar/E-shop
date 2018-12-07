@@ -31,7 +31,7 @@ export const routes = <AdminLTEroot>
     <Route exact path='/kurti' component={NewPost} />
     <Route exact path='/tema/redaguoti' component={EditPost} />
     <Route exact path='/komentaras/redaguoti' component={EditComment} />
-    <Route exact path='/tema' component={Post} />
+    <Route exact path='/tema/:id' component={Post} />
     <Route exact path='/help' component={Help} />
     <Route exact path='/profile' component={Profile} />
     <Route exact path='/edit-profile' component={EditProfile} />

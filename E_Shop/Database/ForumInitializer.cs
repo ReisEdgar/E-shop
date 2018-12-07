@@ -18,10 +18,10 @@ namespace E_Shop.Database
             {
                 var Forums = new List<Forum>
                 {
-                new Forum{Title="Konsolės žaidimai",Text="Konsolių žaidimų forumas", Link="konsoles"},
-                new Forum{Title="PC žaidimai",Text="PC žaidimų forumas", Link="pc"},
-                new Forum{Title="Įranga",Text="Žaidimų įrangos forumas", Link="iranga"},
-                new Forum{Title="Kita",Text="Forumas apie viską", Link="other"},
+                new Forum{Title="Konsolės žaidimai",Text="Konsolių žaidimų forumas", Link="konsoles", CategoryID = 1},
+                new Forum{Title="PC žaidimai",Text="PC žaidimų forumas", Link="pc", CategoryID = 0},
+                new Forum{Title="Įranga",Text="Žaidimų įrangos forumas", Link="iranga", CategoryID = 2},
+                new Forum{Title="Kita",Text="Forumas apie viską", Link="kita", CategoryID=3}
                 };
 
                 Forums.ForEach(s => context.Forums.Add(s));

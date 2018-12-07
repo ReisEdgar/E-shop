@@ -29,7 +29,8 @@ namespace E_Shop.Controllers
             {
                 id = x.Id,
                 x.Title,
-                x.Link
+                x.Link,
+                x.Posts.Count
             })
             .Take(count);
 
