@@ -14,11 +14,13 @@ export class Help extends React.Component<RouteComponentProps<{}>, any> {
     userAutentificationResponse(response) {
         if (response) {
             this.setState({ user: response, admin: response.role == 3, loaded : true});
+        }else{
+            this.setState({ user: null, admin: false, loaded : true});
         }
     }
     componentDidMount() {
         console.log("parent");
-        fetchCurrentUser(this.userAutentificationResponse);
+        var result = fetchCurrentUser(this.userAutentificationResponse);
     }
 
     public render() {

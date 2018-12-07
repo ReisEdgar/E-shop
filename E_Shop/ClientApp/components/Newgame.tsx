@@ -2,12 +2,13 @@
 import { RouteComponentProps } from 'react-router';
 import Fetcher from 'request';
 import { fetchCurrentUser } from "./UserFetcher";
+import axios from "axios";
 
-export class Newgame extends React.Component<RouteComponentProps<{}>, any> {
+export class Newgame extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
-        this.state = { user: null, admin: false };
+        this.state = { open: false, id:this.props.id, name: this.props.name, description: this.props.description, price: this.props.price, location: this.props.location, Gamecategory: this.props.Gamecategory, phonenumber: this.props.phonenumber, quantity: this.props.quantity,};
         this.userAutentificationResponse = this.userAutentificationResponse.bind(this);
         this.categoryChange = this.categoryChange.bind(this);
         this.handledescriptionchange = this.handledescriptionchange.bind(this);
@@ -16,17 +17,30 @@ export class Newgame extends React.Component<RouteComponentProps<{}>, any> {
         this.locationChange = this.locationChange.bind(this);
         this.phonenumberChange = this.phonenumberChange.bind(this);
         this.quantityChange = this.quantityChange.bind(this);
-
+        this.NewGameItem = this.NewGameItem.bind(this);
     }
 
     NewGameItem() {
         var config = {
             headers: { 'Authorization': "bearer " + window.localStorage.accessToken }
         };
-
-
+        var games = { Id: this.props.id, name: this.state.name, description: this.state.description, price: this.state.price, location: this.state.location, Gamecategory: this.state.Gamecategory, phonenumber: this.state.phonenumber, quantity: this.state.quantity };
+        console.log(games);
+        axios.post('/api/games', games, config)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        this.openCreationForm();
     }
 
+    openCreationForm() {
+        var state: any = this.state;
+        state.open = !this.state.open;
+        this.setState(state);
+    }
 
     /*Kategorijos pakeitimas duombazej*/
     categoryChange(event) {
@@ -89,8 +103,8 @@ export class Newgame extends React.Component<RouteComponentProps<{}>, any> {
 
         return <div className="container">
 
-            <div> Žaidimo kategorija</div>
-                   <select value={this.state.category} onChange={this.categoryChange}>
+            <label> Žaidimo kategorija</label>
+                 <div> <select value={this.state.category} onChange={this.categoryChange}>
                        <option value="ACTION">ACTION</option>
                        <option value="Adventure">Adventure</option>
                        <option value="Role_playing">Role_playing</option>
@@ -98,6 +112,7 @@ export class Newgame extends React.Component<RouteComponentProps<{}>, any> {
                        <option value="Strategy">Strategy</option>
                        <option value="Sports">Sports</option>
             </select>
+            </div> 
             <div>
                 <div>Pavadinimas</div>
                 <input onChange={this.nameChange} />
@@ -128,6 +143,7 @@ export class Newgame extends React.Component<RouteComponentProps<{}>, any> {
                 <div>Išsaugoti Skelbima</div>
 
             </p>
+            <button className="btn btn-success" onClick={this.NewGameItem}>Išsaugoti</button>
                </div>
     }
 }

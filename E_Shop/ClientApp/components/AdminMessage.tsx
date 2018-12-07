@@ -54,11 +54,11 @@ sendResponse (){
 
     public render() {
 
-        return <div>
+        return <div className="padding">
 
                 <div>
                 <p>
-                        <label>{this.props.sender}</label>
+                        <label className={this.props.highlight ? "highlight" : ""}>{this.props.sender}</label>
                 </p>
                 {this.state.showMessage ?
                     <div>

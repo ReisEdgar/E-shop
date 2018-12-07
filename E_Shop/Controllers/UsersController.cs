@@ -113,13 +113,19 @@ namespace E_Shop.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
+            var currentUser = await _authorizationService.GetUserByTokenFromRequest(this.Request);
 
-            if (id != user.Id)
+            if (id != user.Id || user.Id != currentUser.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            currentUser.Nickname = user.Nickname;
+            currentUser.Description = user.Description;
+            
+
+            _context.Entry(currentUser).State = EntityState.Modified;
 
             try
             {

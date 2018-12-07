@@ -13,6 +13,7 @@ class HardwareItem extends React.Component<any, any> {
         this.ownerInputChange = this.ownerInputChange.bind(this);
         this.dateInputChange = this.dateInputChange.bind(this);
         this.openCreationForm = this.openCreationForm.bind(this);
+        console.log(this.state);
     }
 
     newHardwareItem(){
@@ -20,9 +21,10 @@ class HardwareItem extends React.Component<any, any> {
             headers: {'Authorization': "bearer " + window.localStorage.accessToken}
        };
        var hardware = {Id:this.props.id, Status: this.state.status, Category : this.state.category, Owner: this.state.owner, StartDate: this.state.date};
-     console.log(hardware);
+      console.log(hardware);
        axios.post('/api/Hardware', hardware, config)
             .then( (response) => {
+                console.log(this.props);
                 this.props.refetch();
                 console.log(response);
             })
@@ -91,7 +93,7 @@ render() {
                             <select className="form-control" value={this.state.category}  onChange={this.categoryChange} style={myStyle}>
                             <option value = "PC">PC</option>                
                             <option value = "LAPTOP">LAPTOP</option>
-                            <option value = "PS">PLAYSTATION</option>
+                            <option value = "PLAYSTATION">PLAYSTATION</option>
                                 <option value = "Xbox">Xbox</option>
                                 <option value = "NINTENDO">NINTENDO</option>
                                 <option value = "KINECT">KINECT</option>
@@ -114,7 +116,7 @@ render() {
                             <Col span={2}>
   
                             <label>Pridavimo data</label>
-                            <input type="text" className="form-control" value={this.state.startDate} onChange={this.dateInputChange} placeholder = "Pvz.: 2018-03-25"/>
+                            <input type="text" className="form-control" value={this.state.date} onChange={this.dateInputChange} placeholder = "Pvz.: 2018-03-25"/>
                             </Col>               
                        
                             <Col span={2}>

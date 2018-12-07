@@ -16,7 +16,7 @@ export class AdminMessageList extends React.Component<any, any> {
        };
         axios.get('/api/Message/admin', config)
             .then( (response) => {
-               // console.log(response);
+                console.log(response);
     this.setState({messages : response.data})
             })
             .catch(function (error) {
@@ -34,7 +34,7 @@ componentDidMount(){
             {this.state.messages ?
                             this.state.messages.map(req =>
                         <tr  key={req.id}>
-                            <AdminMessage refetch={this.getMessages} sender={req.senderEmail} message={req.text} id = {req.id} />
+                            <AdminMessage refetch={this.getMessages} sender={req.senderEmail} highlight={req.messageType == 2} message={req.text} id = {req.id} />
 
                         </tr>
                     )

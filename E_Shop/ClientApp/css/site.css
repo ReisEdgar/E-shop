@@ -27,7 +27,13 @@ body.custom-font {
     width : 400px;
     height : 150px;
 }
+.padding{
+padding: 5px;
+}
 
+.highlight{
+    background-color: red;
+}
 @media (max-width: 767px) {
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     body {

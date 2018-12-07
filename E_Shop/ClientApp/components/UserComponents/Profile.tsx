@@ -1,8 +1,24 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import {Link} from "react-router-dom";
+import { fetchCurrentUser } from "../UserFetcher";
 
-export class Profile extends React.Component<RouteComponentProps<{}>, {}> {
+class Profile extends React.Component<RouteComponentProps<{}>, any> {
+    constructor(props) {
+        super(props);
+        this.state = { user: null, admin: false };
+        this.userAutentificationResponse = this.userAutentificationResponse.bind(this);
+    }
+
+    userAutentificationResponse(response) {
+        if (response) {
+            this.setState({ user: response, admin: response.role == 3 });
+        }
+    }
+    componentDidMount() {
+        console.log("parent");
+        fetchCurrentUser(this.userAutentificationResponse);
+    }
 
     public render() {
 
@@ -10,31 +26,28 @@ export class Profile extends React.Component<RouteComponentProps<{}>, {}> {
             <section className="content-header">
                 <h1>
                     Profilis
-                    <small>Optional description</small>
                 </h1>
             </section>
 
-            <section className="content container-fluid">
-                <div className="row">
+            {this.state.user ?
+                <section className="content container-fluid">
+                    <div className="row">
                     <div className="col-sm-6">
                         <div className="box box-primary">
                             <div className="box-body box-profile">
                                 <img className="profile-user-img img-responsive img-circle"
-                                     src="../../dist/img/user4-128x128.jpg" alt="User profile picture"/>
+                                     src={this.state.user.picture} alt="User profile picture"/>
 
-                                    <h3 className="profile-username text-center">Nina Mcintire</h3>
+                                    <h3 className="profile-username text-center">{this.state.user.fullName}</h3>
 
-                                    <p className="text-muted text-center">nina89</p>
+                                    <p className="text-muted text-center">{this.state.user.nickname}</p>
 
                                     <ul className="list-group list-group-unbordered">
                                         <li className="list-group-item">
-                                            <b>Narys nuo</b> <a className="pull-right">2018-10-29</a>
+                                            <b>Forumo slapyvardis</b> <a className="pull-right">{this.state.user.nickname || "-"}</a>
                                         </li>
                                         <li className="list-group-item">
-                                            <b>Forumo slapyvardis</b> <a className="pull-right">nina89</a>
-                                        </li>
-                                        <li className="list-group-item">
-                                            <b>Sistemos rolė</b> <a className="pull-right">Administratorius</a>
+                                            <b>Sistemos rolė</b> <a className="pull-right">{this.state.user.getRoleName()}</a>
                                         </li>
                                     </ul>
 
@@ -63,17 +76,12 @@ export class Profile extends React.Component<RouteComponentProps<{}>, {}> {
 
                                 <strong><i className="fa fa-file-text-o margin-r-5"></i> Aprašymas</strong>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum
-                                    enim neque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum
-                                    enim neque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum
-                                    enim neque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum
-                                    enim neque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum
-                                    enim neque.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum
-                                    enim neque.</p>
+                                <p>{this.state.user.description}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                {this.state.admin ? 
                 <div className='row'>
                     <div className='col-sm-6'>
                         <div className="box box-default">
@@ -89,9 +97,10 @@ export class Profile extends React.Component<RouteComponentProps<{}>, {}> {
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </section>
+                </div> : ''}
+            </section> : <h3> Palaukite... </h3> }
         </div>
     }
 }
+
+export default Profile

@@ -13,6 +13,7 @@ export class AdminHardwareList extends React.Component<any,any> {
       this.ownerInputChange = this.ownerInputChange.bind(this);
       this.dateInputChange = this.dateInputChange.bind(this);
       this.openCreationForm = this.openCreationForm.bind(this);
+      this.fetchData = this.fetchData.bind(this);
 
     }
 
@@ -117,7 +118,7 @@ componentDidMount(){
 
      { this.state.items.map(req =>
                         <div  key={req.id}>
-                            <HardwareItem refetch={this.fetchData()} id={req.id} owner={req.owner} startDate={req.startDate} status = {req.status} category = {req.category}  />
+                            <HardwareItem refetch={this.fetchData} id={req.id} owner={req.owner} startDate={req.startDate} status = {req.status} category = {req.category}  />
      </div>)}
 </div>
                     :<div></div>
