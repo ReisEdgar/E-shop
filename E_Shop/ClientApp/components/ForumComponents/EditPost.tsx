@@ -160,10 +160,8 @@ export class EditPost extends React.Component<any, any> {
                 }}
               >
                 <i>
-                  Marius 2018-12-04
-                  <br />
+                    Autorius : {post.author.fullName}<br/>Įrašo data: {post.publishingDate.slice(0, 10)}
                 </i>
-                <i> Redaguota Admin 2018-12-05</i>
               </div>
               <button
                 type="submit"

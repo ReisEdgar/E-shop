@@ -14,6 +14,8 @@ namespace E_Shop.Database.Entities
         [StringLength(500)]
         public String Text { get; set; }
         public DateTime Date { get; set; }
+        public String AuthorID { get; set; }
+        public int PostID { get; set; }
 
         [Required]
         [ForeignKey("PostID")]

@@ -10,6 +10,8 @@ namespace E_Shop.Dto
         public int ID { get; set; }
         public String Text { get; set; }
         public DateTime Date { get; set; }
+        public String AuthorID { get; set; }
+        public int PostID { get; set; }
 
     }
 }

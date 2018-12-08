@@ -82,6 +82,43 @@ namespace E_Shop.Controllers
             .FirstOrDefault();
             return Ok(post);
         }
+
+        [HttpGet("commentsbypost")]
+        public IEnumerable<Object> GetComments(int id)
+        {
+            return _context.Comments
+                .Where(p => (int)p.Post.Id == id)
+            .Select(x => new
+            {
+                id = x.Post.Id,
+                x.Text,
+                x.Author,
+                x.Date
+            })
+            .ToList();
+        }
+
+        [HttpPost("rasytikomentara")]
+        public async Task<IActionResult> PostComment([FromBody]CommentDto comment)
+        {
+            var user = await _authorizationService.GetUserByTokenFromRequest(Request);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            
+            Comment commentt = new Comment();
+            commentt.AuthorID = user.Id;
+            commentt.Date = DateTime.Now;
+            commentt.Text = comment.Text;
+            int posId = (int)comment.PostID;
+            commentt.PostID = _context.Posts.Where(x => x.Id == posId).FirstOrDefault().Id;
+            _context.Add(commentt);
+            _context.SaveChanges();
+            return Ok("prideta");
+        }
+
         [HttpPost("kurti")]
         public async Task<IActionResult> PostTopic([FromBody]PostDto post)
         {

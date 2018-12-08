@@ -28,6 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20181208150927_changesInComment.cs" />
+    <Compile Remove="Migrations\20181208150927_changesInComment.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\components\AdminHardwareList.tsx" />
     <None Remove="ClientApp\components\AdminMessage.tsx" />
     <None Remove="ClientApp\components\AdminMEssageList.tsx" />

@@ -5,9 +5,17 @@ import { Link } from "react-router-dom";
 export class Post extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = { post: "" };
+      this.state = {
+          comments: [],
+          post: '',
+          PostID: '',
+          Text: ''
+      };
       this.getPost = this.getPost.bind(this);
+      this.getComments = this.getComments.bind(this);
       this.handleDelete = this.handleDelete.bind(this);
+      this.deleteComment = this.deleteComment.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   getPost() {
@@ -28,17 +36,58 @@ export class Post extends React.Component<any, any> {
       console.log(this.state.post);
     }
 
+    getComments() {
+        this.setState({
+            commentsLoader: true
+        });
+        const { id } = this.props.match.params;
+        fetch(`http://localhost:56147/api/post/commentsbypost?id=${id}`)
+            .then(res => {
+                return res.json();
+            })
+            .then(res => {
+                this.setState({
+                    console: console.log(res),
+                    comments: res,
+                    commentsLoader: false
+                });
+            });
+    }
 
-  componentWillMount() {
-    this.getPost();
+    onChangeText = (e) => {
+        var state: any = this.state;
+        state.Text = e.target.value;
+        this.setState(state);
+    }
+
+    handleSubmit(e) {
+
+        e.preventDefault();
+        console.log(this.state.post.id)
+        fetch('/api/post/rasytikomentara', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': "bearer " + window.localStorage.accessToken
+            },
+            body: JSON.stringify({
+                Text: this.state.Text,
+                PostID: this.state.post.id
+            })
+
+        }).then(res => res.text())
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .catch(error => console.error('Error:', error));
+    }
+
+
+    componentWillMount() {
+        this.getPost();
+        this.getComments();
     }
 
     handleDelete(e) {
         e.preventDefault();
-        //var data = {
-        //    Id: this.state.post,
-        //};
-        //console.log(data);
         fetch("/api/post/trinti", {
             method: "DELETE",
             headers: {
@@ -52,11 +101,30 @@ export class Post extends React.Component<any, any> {
             .catch(error => console.error("Error:", error));
     }
 
+
+    deleteComment(e) {
+        e.preventDefault();
+        fetch("/api/post/trintikomentara", {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                Authorization: "bearer " + window.localStorage.accessToken
+            },
+            body: JSON.stringify(this.state.comments)
+        })
+            .then(res => res.text())
+            .then(response => console.log("Success:", JSON.stringify(response)))
+            .catch(error => console.error("Error:", error));
+    }
+
+
   public render() {
     const post = this.state.post;
     if (!post) {
       return <div className="container" />;
-    }
+      }
+    const Text = this.state.Text;
+
     return (
       <div className="container">
         <div
@@ -101,76 +169,31 @@ export class Post extends React.Component<any, any> {
             </i>
           </div>
         </div>
-
-        <div
-          className="box"
-          style={{
-            width: "50%",
-            borderWidth: 5,
-            borderRadius: 20,
-            padding: 5
-          }}
-        >
-          <div className="box-header">
-            <div className="box-tools pull-right">
-              <span className="label label-primary">
-                <a
-                  href="/komentaras/redaguoti"
-                  style={{ color: "white", textDecoration: "none" }}
+        {this.state.comments.map(dynamicData => (
+                <div
+                    className="box"
+                    style={{
+                        width: "50%",
+                        borderWidth: 5,
+                        borderRadius: 20,
+                        padding: 5
+                    }}
+                    key={dynamicData.id}
                 >
-                  Readaguoti
-                </a>
-              </span>
-              <span className="label label-danger">Ištrinti</span>
-            </div>
-          </div>
-          <div className="box-body" style={{ fontSize: 20 }}>
-            Susitaisyk
-          </div>
-          <div
-            className="box-footer"
-            style={{
-              textAlign: "right"
-            }}
-          >
-            <i>Marius 2018-12-04</i>
-          </div>
-        </div>
-        <div
-          className="box"
-          style={{
-            width: "50%",
-            borderWidth: 5,
-            borderRadius: 20,
-            padding: 5
-          }}
-        >
-          <div className="box-header">
-            <div className="box-tools pull-right">
-              <span className="label label-primary">
-                <a
-                  href="/komentaras/redaguoti"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  Readaguoti
-                </a>
-              </span>
-              <span className="label label-danger">Ištrinti</span>
-            </div>
-          </div>
-          <div className="box-body" style={{ fontSize: 20 }}>
-            Nzn
-          </div>
-          <div
-            className="box-footer"
-            style={{
-              textAlign: "right"
-            }}
-          >
-            <i>Marius 2018-12-04</i>
-          </div>
-        </div>
-
+                    <div className="box-body" style={{ fontSize: 20 }}>
+                        {dynamicData.text}
+                    </div>
+                    <div
+                        className="box-footer"
+                        style={{
+                            textAlign: "right"
+                        }}
+                    >
+                        <i>{dynamicData.author.fullName}<br />
+                            {dynamicData.date.slice(0, 10)}</i>
+                    </div>
+                </div>
+            ))}
         <div
           className="box box-info"
           style={{
@@ -182,7 +205,7 @@ export class Post extends React.Component<any, any> {
           <div className="box-header with-border" style={{ fontSize: 20 }}>
             <h3 className="box-title">Komentaro rašymo langas</h3>
           </div>
-          <form className="form-horizontal">
+            <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="box-body">
               <div className="form-group">
                 <div className="col-lg-12">
@@ -191,6 +214,9 @@ export class Post extends React.Component<any, any> {
                     rows={3}
                     style={{ fontSize: 20 }}
                     placeholder="Rašykite komenstarą ..."
+                    id="turinys"
+                    value={Text}
+                    onChange={this.onChangeText}
                   />
                 </div>
               </div>
