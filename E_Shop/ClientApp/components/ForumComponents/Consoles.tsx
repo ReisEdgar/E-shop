@@ -138,36 +138,9 @@ export class Consoles extends React.Component<any, any> {
                               </div>
                             </td>
                             <td style={{ width: "10%" }}>
-                              <div className="btn-group-xs closed">
-                                <button
-                                  type="button"
-                                  className="btn btn-default"
-                                >
-                                  Redaguoti
-                                </button>
-                                <button
-                                  type="button"
-                                  className="btn btn-default dropdown-toggle"
-                                  data-toggle="dropdown"
-                                  aria-expanded="true"
-                                >
-                                  <span className="caret" />
-                                  <span className="sr-only">
-                                    Toggle Dropdown
-                                  </span>
-                                </button>
-                                <ul className="dropdown-menu" role="menu">
-                                  <li>
-                                  <a href={`/tema/redaguoti/${dynamicData.id}`}>Redaguoti</a>
-                                  </li>
-                                  <li>
-                                    <a href="/tema/redaguoti">Užrakinti</a>
-                                  </li>
-                                  <li>
-                                    <a href="/tema/redaguoti">Trinti</a>
-                                  </li>
-                                </ul>
-                              </div>
+                            <div>
+                                <button type="button" className="btn btn-block btn-warning"><a href={`/tema/redaguoti/${dynamicData.id}`}>Redaguoti</a></button>
+                            </div>
                             </td>
                             <td>{dynamicData.author.fullName}</td>
                             <td>{dynamicData.publishingDate.slice(0, 10)}</td>

@@ -128,5 +128,23 @@ namespace E_Shop.Controllers
             _context.SaveChanges();
             return Ok("edited");
         }
+
+        [HttpDelete("trinti")]
+        public async Task<IActionResult> DeletePost([FromBody]PostDto post)
+        {
+            var user = await _authorizationService.GetUserByTokenFromRequest(Request);
+
+            /*if (user.Id != post.AuthorID)
+            {
+                return Unauthorized();
+            }*/
+
+            Post deletePost = _context.Posts.Where(x => x.Id == post.Id).FirstOrDefault();
+
+            _context.Posts.Remove(deletePost);
+            _context.SaveChanges();
+
+            return Ok("deleted");
+        }
     }
 }

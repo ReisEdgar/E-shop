@@ -6,7 +6,8 @@ export class Post extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = { post: "" };
-    this.getPost = this.getPost.bind(this);
+      this.getPost = this.getPost.bind(this);
+      this.handleDelete = this.handleDelete.bind(this);
   }
 
   getPost() {
@@ -23,12 +24,33 @@ export class Post extends React.Component<any, any> {
           post: res,
           postsLoader: false
         });
-      });
-  }
+          });
+      console.log(this.state.post);
+    }
+
 
   componentWillMount() {
     this.getPost();
-  }
+    }
+
+    handleDelete(e) {
+        e.preventDefault();
+        //var data = {
+        //    Id: this.state.post,
+        //};
+        //console.log(data);
+        fetch("/api/post/trinti", {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                Authorization: "bearer " + window.localStorage.accessToken
+            },
+            body: JSON.stringify(this.state.post)
+        })
+            .then(res => res.text())
+            .then(response => console.log("Success:", JSON.stringify(response)))
+            .catch(error => console.error("Error:", error));
+    }
 
   public render() {
     const post = this.state.post;
@@ -61,9 +83,8 @@ export class Post extends React.Component<any, any> {
                 >
                   Redaguoti
                 </a>
-              </span>
-              <span className="label label-warning">Užrakinti</span>
-              <span className="label label-danger">Ištrinti</span>
+                </span>
+                <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
             </div>
           </div>
           <div className="box-body" style={{ fontSize: 20 }}>
