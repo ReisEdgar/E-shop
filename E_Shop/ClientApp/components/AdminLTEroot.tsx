@@ -14,7 +14,7 @@ export class AdminLTEroot extends React.Component<LayoutProps, {}> {
         var minHeight = {
             minHeight: '868px',
         };
-        return <div className="wrapper">
+        return <div id="modalRoot" className="wrapper">
             <Header />
             <div className="content-wrapper" style={minHeight}>  
                 {this.props.children}

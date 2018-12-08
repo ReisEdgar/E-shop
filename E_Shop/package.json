@@ -50,7 +50,9 @@
     "react-bootstrap": "^0.32.4",
     "react-google-login": "^3.2.1",
     "react-grid-system": "^4.3.1",
+    "react-modal": "^3.6.1",
     "react-responsive-modal": "^3.4.0",
+    "react-select": "^2.1.2",
     "react-simple-flex-grid": "^1.2.3",
     "request": "^2.88.0",
     "webpack-dev-server": "^3.1.10"

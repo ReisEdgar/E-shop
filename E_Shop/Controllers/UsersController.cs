@@ -81,9 +81,15 @@ namespace E_Shop.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public async Task<IActionResult> GetUsers()
         {
-            return _context.User;
+            var currentUser = await _authorizationService.GetUserByTokenFromRequest(this.Request);
+            if (currentUser == null || currentUser.Role != UserRole.Admin)
+            {
+                return Unauthorized();
+            }
+            
+            return Ok(_context.User);
         }
 
         // GET: api/Users/5
@@ -126,6 +132,52 @@ namespace E_Shop.Controllers
             
 
             _context.Entry(currentUser).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+        
+        // PUT: api/Users/updateRole/5
+        [HttpPut("updateRole/{id}")]
+        public async Task<IActionResult> PutUserRole([FromRoute] string id, [FromBody] int roleUser)
+        {
+           
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            var currentUser = await _authorizationService.GetUserByTokenFromRequest(this.Request);
+            var user = await _context.User.SingleOrDefaultAsync(m => m.Id == id);
+
+            if (currentUser == null || currentUser.Role != UserRole.Admin)
+            {
+                return Unauthorized();
+            }
+
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            user.Role = (UserRole)roleUser;
+
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
