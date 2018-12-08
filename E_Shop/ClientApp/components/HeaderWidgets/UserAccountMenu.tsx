@@ -6,6 +6,7 @@ import {GoogleLogin, GoogleLogout} from "react-google-login";
 import {MessagesDropdown} from "./MessagesDropdown";
 import {AlertsDropdown} from "./AlertsDropdown";
 import {ShoppingBasketDropdown} from "./ShoppingBasketDropdown";
+import {Redirect} from "react-router";
 
 
 export class UserAccountMenu extends React.Component<any, any> {
@@ -13,7 +14,8 @@ export class UserAccountMenu extends React.Component<any, any> {
     constructor(props){
         super(props);
         this.state = {
-            currentUser: null
+            currentUser: null,
+            redirectToMain: false
         };
         this.googleLogout = new GoogleLogout();
         this.responseGoogle = this.responseGoogle.bind(this);
@@ -60,13 +62,16 @@ export class UserAccountMenu extends React.Component<any, any> {
     public logout() {
         window.localStorage.accessToken = '';
         this.setState({
-            currentUser: null
+            currentUser: null,
+            redirectToMain: true
         });
+        window.location.reload()
     }
 
     public render() {
 
-        return <div className="navbar-custom-menu">
+       {return this.state.redirectToMain == false ? 
+        <div className="navbar-custom-menu">
             <ul className="nav navbar-nav">
                 {this.state.currentUser != null ? [
                         (<MessagesDropdown key={"messages"}/>),
@@ -121,6 +126,6 @@ export class UserAccountMenu extends React.Component<any, any> {
                         />
                     </li>}
             </ul>
-        </div>
+        </div> : <Redirect to={'/'}/>}
     }
 }
