@@ -116,7 +116,7 @@ namespace E_Shop.Logic
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (left.First().SendingDateTime >= right.First().SendingDateTime)  //Comparing First two elements to see which is smaller
+                    if (left.First().SendingDateTime <= right.First().SendingDateTime)  //Comparing First two elements to see which is smaller
                     {
                         result.Add(left.First());
                         left.Remove(left.First());      //Rest of the list minus the first element

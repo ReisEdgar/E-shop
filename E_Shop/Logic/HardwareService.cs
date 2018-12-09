@@ -83,6 +83,37 @@ namespace E_Shop.Logic
             return toReturn;
         }
 
+        public List<HardwareDto> GetHardwareByUser(string owner)
+        {
+            var result = _context.HardwareRecords.Where(x => x.Owner == owner);
+
+            /* if(request.Owner != null)
+             {
+                 result = result.Where(x => x.Owner == request.Owner);
+             }
+
+             if(request.Statuses.Count > 0)
+             {
+                 List<Database.Entities.HardwareStatus> Statuses = _mapper.Map<List<Dto.HardwareStatus>, List<Database.Entities.HardwareStatus>>(request.Statuses);
+                 result = result.Where(x => Statuses.Contains(x.HardwareStatus));
+             }
+
+             if (request.Categories.Count > 0)
+             {
+                 List<Database.Entities.HardwareCategory> Categories = _mapper.Map<List<Dto.HardwareCategory>, List<Database.Entities.HardwareCategory>>(request.Categories);
+                 result = result.Where(x => Categories.Contains(x.HardwareCategory));
+             }*/
+            var entityList = result.ToList();
+            var toReturn = _mapper.Map<List<Hardware>, List<HardwareDto>>(entityList);
+            for (int i = 0; i < toReturn.Count; i++)
+            {
+                toReturn[i].StartDate = entityList[i].StartDate.ToShortDateString();
+
+            }
+            return toReturn;
+        }
+
+
         public HardwareDto GetHardwareItemById(int id)
         {
             return _mapper.Map<Hardware, HardwareDto>(_context.HardwareRecords.FirstOrDefault(x => x.Id == id));

@@ -2,6 +2,7 @@
 using E_Shop.Logic.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Net.Http;
 
 namespace E_Shop.Controllers
@@ -29,11 +30,19 @@ namespace E_Shop.Controllers
             {
                 return Unauthorized();
             }
-            if (user.Role != Database.Entities.UserRole.Admin)
+            List<HardwareDto> result = new List<HardwareDto>();
+
+            if (user.Role == Database.Entities.UserRole.User)
             {
-                return Forbid();
+                result = _hardwareService.GetHardwareByUser(user.Email);
+
             }
-            var result = _hardwareService.GetHardware();
+            else
+            {
+                result = _hardwareService.GetHardware();
+
+            }
+
             if (result == null)
             {
                 return NotFound();
@@ -58,6 +67,7 @@ namespace E_Shop.Controllers
                 return Ok(result);
             }
         }
+
         [HttpGet("Delete/{id}")]
         public async System.Threading.Tasks.Task<IActionResult> DeleteAsync(int id)
         {

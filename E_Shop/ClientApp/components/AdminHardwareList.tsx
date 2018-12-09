@@ -94,6 +94,8 @@ for(var i = 0; i < response.data.length; i++){
 
             state.items = response.data;      
         this.setState(state); 
+        this.fetchData(); 
+
         })
         .catch(function (error) {
             console.log(error);
@@ -144,7 +146,7 @@ componentDidMount(){
                                 <option value = "Xbox">Xbox</option>
                                 <option value = "NINTENDO">NINTENDO</option>
                                 <option value = "KINECT">KINECT</option>
-                                <option value = "WII">PS3</option>
+                                <option value = "WII">WII</option>
                                 <option value = "PSP">PSP</option>
 
                                 </select>
