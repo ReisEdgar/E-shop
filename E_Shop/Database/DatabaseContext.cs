@@ -23,8 +23,8 @@ namespace E_Shop.Database
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Forum> Forums { get; set; }
-        public DbSet<games> games { get; set; } /*
+        public DbSet<Zaidimai> Zaidimai { get; set; } 
             public DbSet<Konsole> Konsole { get; set; }
-            */
+            
     }
 }
