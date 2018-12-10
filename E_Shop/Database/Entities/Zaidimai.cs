@@ -7,28 +7,29 @@ using System.Threading.Tasks;
 
 namespace E_Shop.Database.Entities
 {
-    public class Konsole
+    public class Zaidimai
     {
         public int Id { get; set; }
-        [Required]
-        [StringLength(50)]
         public String name { get; set; }
+        [Required]
         [StringLength(500)]
         public String Text { get; set; }
         public String AuthorID { get; set; }
-        public String model { get; set; }
-        public ConsoleMaker Category { get; set; }
+        public GameCategory category { get; set; }
 
         [ForeignKey("AuthorID")]
         public virtual User Author { get; set; }
     }
 
 
-    public enum ConsoleMaker
+    public enum GameCategory
     {
-        Playstation,
-        Microsoft,
-        Nintendo
+        ACTION,
+        Adventure,
+        Role_playing,
+        Simulation,
+        Strategy,
+        Sports
     }
 }
 
