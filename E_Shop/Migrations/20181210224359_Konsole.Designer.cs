@@ -4,14 +4,16 @@ using E_Shop.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Shop.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20181210224359_Konsole")]
+    partial class Konsole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,28 +209,6 @@ namespace E_Shop.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("E_Shop.Database.Entities.Zaidimai", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AuthorID");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(500);
-
-                    b.Property<int>("category");
-
-                    b.Property<string>("name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorID");
-
-                    b.ToTable("Zaidimai");
-                });
-
             modelBuilder.Entity("E_Shop.Database.Entities.Comment", b =>
                 {
                     b.HasOne("E_Shop.Database.Entities.User", "Author")
@@ -270,13 +250,6 @@ namespace E_Shop.Migrations
                         .WithMany("Posts")
                         .HasForeignKey("ForumID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("E_Shop.Database.Entities.Zaidimai", b =>
-                {
-                    b.HasOne("E_Shop.Database.Entities.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorID");
                 });
 #pragma warning restore 612, 618
         }
