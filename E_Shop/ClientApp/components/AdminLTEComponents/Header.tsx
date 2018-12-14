@@ -68,7 +68,7 @@ export class Header extends React.Component<{}, HeaderState> {
                                     <li
                                         className={this.state.selectedPage == 'Visos prekes' ? 'active' : ''}
                                         onClick={() => { this.updateSelectedPage('Visos prekes') }}>
-                                        <Link to="/all">Visos prekes</Link>
+                                        <Link to="/Adminall">Visos prekes</Link>
                                     </li>
                                 </ul>
                             </li>

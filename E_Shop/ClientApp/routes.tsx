@@ -15,11 +15,13 @@ import { Help } from './components/Help';
 import Profile from "./components/UserComponents/Profile";
 import {EditProfile} from "./components/UserComponents/EditProfile";
 import { UserList } from "./components/UserComponents/UserList";
-import { console } from "./components/Console";
-import { games } from "./components/Games";
-import { Newgame } from "./components/Newgame"; 
-import { NewKonsole } from "./components/NewKonsole";
+import { console } from "./components/Katalog/Console";
+import { games } from "./components/Katalog/Games";
+import { Newgame } from "./components/Katalog/Newgame"; 
+import { NewKonsole } from "./components/Katalog/NewKonsole";
+import { Adminall } from "./components/Katalog/Adminall";
 
+//Adminall
 export const routes = <AdminLTEroot>
     <Route exact path='/' component={Catalog} />
     <Route exact path='/catalog' component={Catalog} />
@@ -40,6 +42,7 @@ export const routes = <AdminLTEroot>
     <Route exact path='/games' component={games} />
     <Route exact path='/Newgame' component={Newgame} />
     <Route exact path='/NewKonsole' component={NewKonsole} />
+    <Route exact path='/Adminall' component={Adminall} />
                           
 
-</AdminLTEroot>;
+                      </AdminLTEroot>;
