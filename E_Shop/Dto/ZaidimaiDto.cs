@@ -14,14 +14,16 @@ namespace E_Shop.Dto
         public String AuthorID { get; set; }
         public GameCategory category { get; set; }
     }
+    /*
+       public enum GameCategory
+       {
+           ACTION,
+           Adventure,
+           Role_playing,
+           Simulation,
+           Strategy,
+           Sports
+       }
 
-    public enum GameCategory
-    {
-        ACTION,
-        Adventure,
-        Role_playing,
-        Simulation,
-        Strategy,
-        Sports
-    }
+      */
 }

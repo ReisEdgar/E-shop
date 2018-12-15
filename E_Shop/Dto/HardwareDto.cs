@@ -15,7 +15,8 @@ namespace E_Shop.Dto
         public string StartDate { get; set; }
         public string AdditionalMessage { get; set; }
 
-    }/*
+    }
+    /*
     public enum HardwareStatus
     {
         WAITING,

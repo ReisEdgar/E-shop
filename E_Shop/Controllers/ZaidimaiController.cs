@@ -8,7 +8,7 @@ using E_Shop.Dto;
 using E_Shop.Logic.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using GameCategory = E_Shop.Dto.GameCategory;
+//using GameCategory = E_Shop.Dto.GameCategory;
 
 namespace E_Shop.Controllers
 {
@@ -57,7 +57,7 @@ namespace E_Shop.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> AddGame([FromBody]ZaidimaiDto zaidimai)
+        public async Task<IActionResult> AddZaidimai([FromBody]ZaidimaiDto zaidimai)
         {
             
             var user = await _authorizationService.GetUserByTokenFromRequest(Request);
@@ -69,11 +69,13 @@ namespace E_Shop.Controllers
 */
             Zaidimai zzaidimai = new Zaidimai();
 
-            zzaidimai.AuthorID = user.Id;
+            
             zzaidimai.name = zaidimai.name;
             zzaidimai.Text = zaidimai.Text;
-         //   zzaidimai.category = (Database.Entities.GameCategory)zaidimai.category;
-            
+            zzaidimai.category = zaidimai.category;
+            zzaidimai.AuthorID = user.Id;
+            //   zzaidimai.category = (Database.Entities.GameCategory)zaidimai.category;
+
 
 
             _context.Add(zzaidimai);
@@ -81,16 +83,13 @@ namespace E_Shop.Controllers
             return Ok("Added");
         }
 
-
+        
         [HttpDelete("Delete")]
         public async Task<IActionResult> DeleteZaidimai([FromBody]ZaidimaiDto zaidimai)
         {
             var user = await _authorizationService.GetUserByTokenFromRequest(Request);
 
-            /*if (user.Id != post.AuthorID)
-            {
-                return Unauthorized();
-            }*/
+         
 
             Zaidimai deleteZaidimai = _context.Zaidimai.Where(x => x.Id == zaidimai.Id).FirstOrDefault();
 
@@ -100,23 +99,7 @@ namespace E_Shop.Controllers
             return Ok("deleted");
         }
      
+      
 
-        /*
-        [Route("{id:string}/Author")]
-        [HttpGet]
-        public IEnumerable<Object> GetAuthor(int id)
-        {
-            return _context.Zaidimai
-                .Where(p => (string)p.Author == id)
-                .Select(x => new
-                {
-                    id = x.Id,
-                    x.name,
-                    x.Text,
-                    x.Author,
-                    x.category
-                }).ToList();
-        }
-        */
     }
 }
