@@ -65,10 +65,16 @@ export class Header extends React.Component<{}, HeaderState> {
                                         onClick={() => { this.updateSelectedPage('Ikelti konsolės skelbima') }}>
                                         <Link to="/NewKonsole">Ikelti konsolės skelbima</Link>
                                     </li>
+                                    <li className="divider"></li>
                                     <li
-                                        className={this.state.selectedPage == 'Visos prekes' ? 'active' : ''}
-                                        onClick={() => { this.updateSelectedPage('Visos prekes') }}>
-                                        <Link to="/Adminall">Visos prekes</Link>
+                                        className={this.state.selectedPage == 'Visi Zaidimu Sklebimai' ? 'active' : ''}
+                                        onClick={() => { this.updateSelectedPage('Visi Zaidimu Sklebimai') }}>
+                                        <Link to="/AdminGames">Visi Zaidimu Sklebimai</Link>
+                                    </li>
+                                      <li
+                                        className={this.state.selectedPage == 'Visi Konsoliu skelbimai' ? 'active' : ''}
+                                        onClick={() => { this.updateSelectedPage('Visi Konsoliu skelbimai') }}>
+                                        <Link to="/AdminKonsoles">Visi Konsoliu skelbimai</Link>
                                     </li>
                                 </ul>
                             </li>

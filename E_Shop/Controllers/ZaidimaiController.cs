@@ -8,6 +8,7 @@ using E_Shop.Dto;
 using E_Shop.Logic.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using GameCategory = E_Shop.Dto.GameCategory;
 
 namespace E_Shop.Controllers
 {
@@ -40,7 +41,7 @@ namespace E_Shop.Controllers
 
      // /api/Zaidimai/0/Category
         [Route("{id:int}/Category")]
-        [HttpGet]
+        [HttpGet("bycategory")]
         public IEnumerable<Object> GetCategory(int id)
         {
             return _context.Zaidimai
@@ -58,17 +59,21 @@ namespace E_Shop.Controllers
         [HttpPost("Add")]
         public async Task<IActionResult> AddGame([FromBody]ZaidimaiDto zaidimai)
         {
+            
             var user = await _authorizationService.GetUserByTokenFromRequest(Request);
-
+            /*
             if (user == null)
             {
                 return Unauthorized();
             }
-
+*/
             Zaidimai zzaidimai = new Zaidimai();
 
             zzaidimai.AuthorID = user.Id;
-            //zzaidimai.category = (Zaidimai.GameCategory)zaidimai.category;
+            zzaidimai.name = zaidimai.name;
+            zzaidimai.Text = zaidimai.Text;
+         //   zzaidimai.category = (Database.Entities.GameCategory)zaidimai.category;
+            
 
 
             _context.Add(zzaidimai);

@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-export class Adminall extends React.Component<RouteComponentProps<{}>, any> {
+export class AdventureGames extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
@@ -13,11 +13,11 @@ export class Adminall extends React.Component<RouteComponentProps<{}>, any> {
 
         };
         this.getzaidimai = this.getzaidimai.bind(this);
- 
+
     }
 
     getzaidimai() {
-        fetch(`http://localhost:56789/api/zaidimai`)
+        fetch(`http://localhost:56789/api/zaidimai/1/Category`)
             .then(res => {
                 return res.json();
             })
@@ -44,34 +44,45 @@ export class Adminall extends React.Component<RouteComponentProps<{}>, any> {
 
         return (
             <div>
-                <label>Žaidimai</label>
+                <label style={{ fontSize: 40 }}>Žaidimai</label>
 
-                <div className="row">
-                    <div className="col-sm-2" ><label>Pavadinimas</label></div>
-                    <div className="col-sm-2" ><label>Apibudinimas</label></div>
-                    <div className="col-sm-2" ><label>Kategorija</label></div>
-                </div>
+
 
                 <ul>
                     {zaidimais.map(zaidimai => (
-                    <li key={zaidimai.id}>
-                            <table>Pavadinimas: {zaidimai.name}</table>
-                    </li>
+                        <div className="box"
+                            style={{
+                                width: "50%",
+                                borderWidth: 5,
+                                borderRadius: 20,
+                                padding: 5
+                            }}
+                            key={zaidimai.id}
+                        >
+                            <div className="box-body" style={{ fontSize: 20 }}>
+                                Pavadinimas: {zaidimai.name}
+                            </div>
+                            <div className="box-body" style={{
+                                fontSize: 10
+                            }}>
+                                Apibudinimas:  {zaidimai.text}
+                            </div>
+
+
+
+
+                        </div>
                     ))}
                 </ul>
 
             </div>
-            
-            
-            
-            
-            
-            
-            
-            );
+
+        );
     }
 }
 
+
+// <table>Pavadinimas: {zaidimai.name}</table>
 /*
      <ul>
                        {zaidimais.map(zaidimai => (
