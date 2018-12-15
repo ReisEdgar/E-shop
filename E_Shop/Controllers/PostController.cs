@@ -113,6 +113,7 @@ namespace E_Shop.Controllers
             commentt.Date = DateTime.Now;
             commentt.Text = comment.Text;
             int posId = (int)comment.PostID;
+
             commentt.PostID = _context.Posts.Where(x => x.Id == posId).FirstOrDefault().Id;
             _context.Add(commentt);
             _context.SaveChanges();
@@ -131,7 +132,7 @@ namespace E_Shop.Controllers
 
             Post postt = new Post();
             postt.AuthorID = user.Id;
-            postt.Category = (Post.PostCategory)post.Category;
+            postt.Category = (Post.PostCategory) post.Category;
             postt.Edited = false;
             postt.EditedDate = post.EditedDate;
             postt.PublishingDate = post.PublishingDate;

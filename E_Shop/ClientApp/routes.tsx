@@ -15,14 +15,26 @@ import { Help } from './components/Help';
 import Profile from "./components/UserComponents/Profile";
 import {EditProfile} from "./components/UserComponents/EditProfile";
 import { UserList } from "./components/UserComponents/UserList";
-import { console } from "./components/Console";
-import { games } from "./components/Games";
-import { Newgame } from "./components/Newgame"; 
-import { NewKonsole } from "./components/NewKonsole";
+import { console } from "./components/Katalog/Console";
+import { games } from "./components/Katalog/Games";
+import { Newgame } from "./components/Katalog/Newgame"; 
+import { NewKonsole } from "./components/Katalog/NewKonsole";
+import { AdminGames } from "./components/Katalog/Admin/AdminGames";
+import { AdminKonsoles } from "./components/Katalog/Admin/AdminKonsoles";
+import { PlaystationKonsoles } from "./components/Katalog/Konsoles/PlaystationKonsoles";
+import { MicrosoftKonsoles } from "./components/Katalog/Konsoles/MicrosoftKonsoles";
+import { NintendoKonsoles } from "./components/Katalog/Konsoles/NintendoKonsoles";
+import { ActionGames } from "./components/Katalog/Zaidimai/ActionGames";
+import { AdventureGames } from "./components/Katalog/Zaidimai/AdventureGames";
+import { RolePlayingGames } from "./components/Katalog/Zaidimai/RolePlayingGames";
+import { SimulationGames } from "./components/Katalog/Zaidimai/SimulationGames";
+import { StrategyGames } from "./components/Katalog/Zaidimai/StrategyGames";
+import { SportsGames } from "./components/Katalog/Zaidimai/SportsGames";
 
+//Adminall
 export const routes = <AdminLTEroot>
-    <Route exact path='/' component={Catalog} />
-    <Route exact path='/catalog' component={Catalog} />
+    <Route exact path='/' component={games} />
+    <Route exact path='/catalog' component={games} />
     <Route exact path='/forum' component={Forum} />
     <Route exact path='/forum/konsoles' component={Consoles} />
     <Route exact path='/forum/pc' component={Pc} />
@@ -40,6 +52,17 @@ export const routes = <AdminLTEroot>
     <Route exact path='/games' component={games} />
     <Route exact path='/Newgame' component={Newgame} />
     <Route exact path='/NewKonsole' component={NewKonsole} />
+    <Route exact path='/AdminGames' component={AdminGames} />
+    <Route exact path='/AdminKonsoles' component={AdminKonsoles} />
+    <Route exact path='/PlaystationKonsoles' component={PlaystationKonsoles} />
+    <Route exact path='/MicrosoftKonsoles' component={MicrosoftKonsoles} />
+    <Route exact path='/NintendoKonsoles' component={NintendoKonsoles} />
+    <Route exact path='/ActionGames' component={ActionGames} />
+    <Route exact path='/AdventureGames' component={AdventureGames} />
+    <Route exact path='/RolePlayingGames' component={RolePlayingGames} />
+    <Route exact path='/SimulationGames' component={SimulationGames} />
+    <Route exact path='/StrategyGames' component={StrategyGames} />
+    <Route exact path='/SportsGames' component={SportsGames} />
                           
 
-</AdminLTEroot>;
+                      </AdminLTEroot>;
