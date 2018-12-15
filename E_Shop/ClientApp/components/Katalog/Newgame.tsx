@@ -13,6 +13,10 @@ export class Newgame extends React.Component<any, any> {
             category: ''
         }
 
+        this.handleadd = this.handleadd.bind(this);
+       
+
+
     }
 
     onChangename = (e) => {
@@ -49,7 +53,7 @@ export class Newgame extends React.Component<any, any> {
                 headers: {
                     'Content-type': 'application/json',
                     'Authorization': "bearer " + window.localStorage.accessToken
-                },
+                }, 
                 body: JSON.stringify(data)
             }).then(response => console.log('Success:', JSON.stringify(response)))
             .catch(error => console.error('Error:', error));

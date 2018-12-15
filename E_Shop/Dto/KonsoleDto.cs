@@ -16,10 +16,12 @@ namespace E_Shop.Dto
         public ConsoleMaker Category { get; set; }
     }
 
+    /*
     public enum ConsoleMaker
     {
         Playstation,
         Microsoft,
         Nintendo
     }
+*/
 }

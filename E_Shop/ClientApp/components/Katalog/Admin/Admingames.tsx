@@ -8,12 +8,12 @@ export class AdminGames extends React.Component<any, any> {
         this.state = {
             zaidimais: [],
             zaidimaisLoaded: false,
-            Konsoles: [],
-            KonsolesLoaded: false,
+            
 
         };
         this.getzaidimai = this.getzaidimai.bind(this);
- 
+        this.handleDelete = this.handleDelete.bind(this);
+
     }
 
     getzaidimai() {
@@ -32,6 +32,21 @@ export class AdminGames extends React.Component<any, any> {
 
     componentWillMount() {
         this.getzaidimai();
+    }
+
+    handleDelete(e) {
+        e.preventDefault();
+        fetch("api/Zaidimai/Delete", {
+                method: "DELETE",
+                headers: {
+                    "Content-type": "application/json",
+                    Authorization: "bearer " + window.localStorage.accessToken
+                },
+                body: JSON.stringify(this.state.post)
+            })
+            .then(res => res.text())
+            .then(response => console.log("Success:", JSON.stringify(response)))
+            .catch(error => console.error("Error:", error));
     }
 
     public render() {
@@ -59,15 +74,24 @@ export class AdminGames extends React.Component<any, any> {
                             }}
                             key={zaidimai.id}
                         >
+                           
                             <div className="box-body" style={{ fontSize: 20 }}>
                                Pavadinimas: {zaidimai.name}
                             </div>
                             <div className="box-body" style={{ fontSize: 10
                             }}>
-                              Apibudinimas:  {zaidimai.text}
+                                Apibudinimas:  {zaidimai.text}
+                               
                             </div>
-
-                      
+                            <div
+                                className="box-footer"
+                                style={{
+                                    textAlign: "right"
+                                }}
+                            >
+                                
+                            </div>
+                            <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
 
 
                         </div>
