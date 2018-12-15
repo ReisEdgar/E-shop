@@ -13,7 +13,7 @@ export class NewKonsole extends React.Component<any, any> {
             model: '',
             Category: ''
         }
-
+        this.handleaddkonsole = this.handleaddkonsole.bind(this);
     }
 
     onChangename = (e) => {
@@ -50,7 +50,7 @@ export class NewKonsole extends React.Component<any, any> {
             Category: this.state.Category
         };
         console.log(data);
-        fetch('eddit', {
+        fetch('api/Konsole/Add', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
