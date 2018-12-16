@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-export class AdminKonsoles extends React.Component<any, any> {
+export class UserKonsoles extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
@@ -11,11 +11,11 @@ export class AdminKonsoles extends React.Component<any, any> {
 
         };
         this.getKonsole = this.getKonsole.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+
     }
 
     getKonsole() {
-        fetch(`http://localhost:56789/api/Konsole`)
+        fetch(`http://localhost:56789/api/Konsole/111440895566479656217/GetUserKonsoles`)
             .then(res => {
                 return res.json();
             })
@@ -27,22 +27,6 @@ export class AdminKonsoles extends React.Component<any, any> {
             });
         console.log(this.state.post);
     }
-
-    handleDelete(e) {
-        e.preventDefault();
-        fetch("api/Konsole/Delete", {
-                method: "DELETE",
-                headers: {
-                    "Content-type": "application/json",
-                    Authorization: "bearer " + window.localStorage.accessToken
-                },
-                body: JSON.stringify(this.state.post)
-            })
-            .then(res => res.text())
-            .then(response => console.log("Success:", JSON.stringify(response)))
-            .catch(error => console.error("Error:", error));
-    }
-
 
     componentWillMount() {
         this.getKonsole();
@@ -58,7 +42,7 @@ export class AdminKonsoles extends React.Component<any, any> {
 
         return (
             <div>
-                <label style={{ fontSize: 40 }}>Konsolės</label>
+                <label style={{ fontSize: 40 }}>Konsolės Userio</label>
 
 
 
@@ -74,19 +58,19 @@ export class AdminKonsoles extends React.Component<any, any> {
                             key={konsole.id}
                         >
                             <div className="box-body" style={{ fontSize: 20 }}>
-                               Pavadinimas: {konsole.name}
+                                Pavadinimas: {konsole.name}
                             </div>
                             <div className="box-body" style={{
                                 fontSize: 15
                             }}>
-                               Modelis Konsoles: {konsole.model}
+                                Modelis Konsoles: {konsole.model}
                             </div>
                             <div className="box-body" style={{
                                 fontSize: 15
                             }}>
                                 Apibudinimas: {konsole.text}
                             </div>
-                            <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
+
 
 
 

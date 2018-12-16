@@ -1,14 +1,14 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-export class AdminGames extends React.Component<any, any> {
+export class UserGames extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
         this.state = {
             zaidimais: [],
             zaidimaisLoaded: false,
-            
+
 
         };
         this.getzaidimai = this.getzaidimai.bind(this);
@@ -17,7 +17,8 @@ export class AdminGames extends React.Component<any, any> {
     }
 
     getzaidimai() {
-        fetch(`http://localhost:56789/api/zaidimai`)
+
+        fetch(`http://localhost:56789/api/zaidimai/111440895566479656217/ByUserGames`)
             .then(res => {
                 return res.json();
             })
@@ -37,13 +38,13 @@ export class AdminGames extends React.Component<any, any> {
     handleDelete(e) {
         e.preventDefault();
         fetch("api/Zaidimai/Delete", {
-                method: "DELETE",
-                headers: {
-                    "Content-type": "application/json",
-                    Authorization: "bearer " + window.localStorage.accessToken
-                },
-                body: JSON.stringify(this.state.post)
-            })
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                Authorization: "bearer " + window.localStorage.accessToken
+            },
+            body: JSON.stringify(this.state.post)
+        })
             .then(res => res.text())
             .then(response => console.log("Success:", JSON.stringify(response)))
             .catch(error => console.error("Error:", error));
@@ -59,9 +60,9 @@ export class AdminGames extends React.Component<any, any> {
 
         return (
             <div>
-                <label style={{ fontSize: 40 }}>Žaidimai</label>
+                <label style={{ fontSize: 40 }}>Žaidimai Userio</label>
 
-  
+
 
                 <ul>
                     {zaidimais.map(zaidimai => (
@@ -74,14 +75,15 @@ export class AdminGames extends React.Component<any, any> {
                             }}
                             key={zaidimai.id}
                         >
-                           
+
                             <div className="box-body" style={{ fontSize: 20 }}>
-                               Pavadinimas: {zaidimai.name}
+                                Pavadinimas: {zaidimai.name}
                             </div>
-                            <div className="box-body" style={{ fontSize: 10
+                            <div className="box-body" style={{
+                                fontSize: 10
                             }}>
                                 Apibudinimas:  {zaidimai.text}
-                               
+
                             </div>
                             <div
                                 className="box-footer"
@@ -89,9 +91,9 @@ export class AdminGames extends React.Component<any, any> {
                                     textAlign: "right"
                                 }}
                             >
-                                
+
                             </div>
-                          
+                            
 
 
                         </div>
@@ -99,14 +101,12 @@ export class AdminGames extends React.Component<any, any> {
                 </ul>
 
             </div>
-            
-            );
+
+        );
     }
 }
 
-//   <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
-
-
+// <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
 // <table>Pavadinimas: {zaidimai.name}</table>
 /*
      <ul>
