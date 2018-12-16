@@ -58,25 +58,6 @@ namespace E_Shop.Controllers
                 }).ToList();
         }
 
-
-        // /api/Zaidimai/0/Category
-        [Route("{id}/GetUserKonsoles")]
-        [HttpGet("GetUserKonsoles")]
-        public IEnumerable<Object> GetUserKonsoles(string id)
-        {
-            return _context.Konsole
-                .Where(p => (string)p.AuthorID == id)
-                .Select(x => new
-                {
-                    id = x.Id,
-                    x.name,
-                    x.Text,
-                    x.Author,
-                    x.model,
-                    x.Category
-                }).ToList();
-        }
-
         [HttpPost("Add")]
         public async Task<IActionResult> AddKonsole([FromBody] KonsoleDto konsole)
         {

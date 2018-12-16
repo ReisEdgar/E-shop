@@ -91,7 +91,7 @@ export class AdminGames extends React.Component<any, any> {
                             >
                                 
                             </div>
-                          
+                            <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
 
 
                         </div>
@@ -103,8 +103,6 @@ export class AdminGames extends React.Component<any, any> {
             );
     }
 }
-
-//   <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
 
 
 // <table>Pavadinimas: {zaidimai.name}</table>

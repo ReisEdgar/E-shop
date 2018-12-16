@@ -14,7 +14,7 @@ namespace E_Shop.Database
         }
         public static void ForumSeed(DatabaseContext context)
         {
-           
+            /*
                         if (context.Forums.Count() == 0)
                         {
                             var Forums = new List<Forum>
@@ -28,7 +28,7 @@ namespace E_Shop.Database
                             Forums.ForEach(s => context.Forums.Add(s));
                             context.SaveChanges();
                         }
-                       
+                        */
         }
     }
 }

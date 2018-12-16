@@ -20,9 +20,7 @@ import { games } from "./components/Katalog/Games";
 import { Newgame } from "./components/Katalog/Newgame"; 
 import { NewKonsole } from "./components/Katalog/NewKonsole";
 import { AdminGames } from "./components/Katalog/Admin/AdminGames";
-import { allGames } from "./components/Katalog/Admin/allGames";
 import { AdminKonsoles } from "./components/Katalog/Admin/AdminKonsoles";
-import { allkonsoles } from "./components/Katalog/Admin/allkonsoles";
 import { PlaystationKonsoles } from "./components/Katalog/Konsoles/PlaystationKonsoles";
 import { MicrosoftKonsoles } from "./components/Katalog/Konsoles/MicrosoftKonsoles";
 import { NintendoKonsoles } from "./components/Katalog/Konsoles/NintendoKonsoles";
@@ -55,9 +53,7 @@ export const routes = <AdminLTEroot>
     <Route exact path='/Newgame' component={Newgame} />
     <Route exact path='/NewKonsole' component={NewKonsole} />
     <Route exact path='/AdminGames' component={AdminGames} />
-    <Route exact path='/allGames' component={allGames} />
     <Route exact path='/AdminKonsoles' component={AdminKonsoles} />
-    <Route exact path='/allkonsoles' component={allkonsoles} />
     <Route exact path='/PlaystationKonsoles' component={PlaystationKonsoles} />
     <Route exact path='/MicrosoftKonsoles' component={MicrosoftKonsoles} />
     <Route exact path='/NintendoKonsoles' component={NintendoKonsoles} />

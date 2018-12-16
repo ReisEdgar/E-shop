@@ -11,7 +11,7 @@ export class AdminKonsoles extends React.Component<any, any> {
 
         };
         this.getKonsole = this.getKonsole.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+
     }
 
     getKonsole() {
@@ -27,22 +27,6 @@ export class AdminKonsoles extends React.Component<any, any> {
             });
         console.log(this.state.post);
     }
-
-    handleDelete(e) {
-        e.preventDefault();
-        fetch("api/Konsole/Delete", {
-                method: "DELETE",
-                headers: {
-                    "Content-type": "application/json",
-                    Authorization: "bearer " + window.localStorage.accessToken
-                },
-                body: JSON.stringify(this.state.post)
-            })
-            .then(res => res.text())
-            .then(response => console.log("Success:", JSON.stringify(response)))
-            .catch(error => console.error("Error:", error));
-    }
-
 
     componentWillMount() {
         this.getKonsole();
@@ -82,11 +66,11 @@ export class AdminKonsoles extends React.Component<any, any> {
                                Modelis Konsoles: {konsole.model}
                             </div>
                             <div className="box-body" style={{
-                                fontSize: 15
+                                fontSize: 10
                             }}>
                                 Apibudinimas: {konsole.text}
                             </div>
-                            <span className="label label-danger" onClick={this.handleDelete}>Ištrinti</span>
+
 
 
 
