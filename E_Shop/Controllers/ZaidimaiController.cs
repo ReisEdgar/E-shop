@@ -39,7 +39,28 @@ namespace E_Shop.Controllers
             }).ToList();
         }
 
-     // /api/Zaidimai/0/Category
+        
+                // /api/Zaidimai/0/Category
+                [Route("{id}/ByUserGames")]
+                [HttpGet("ByUserGames")]
+                public IEnumerable<Object> GetUserGames(string id)
+                {
+                    return _context.Zaidimai
+                        .Where(p => (string)p.AuthorID == id)
+                        .Select(x => new
+                        {
+                            id = x.Id,
+                            x.name,
+                            x.Text,
+                            x.Author,
+                            x.category
+                        }).ToList();
+                }
+
+        
+          
+
+        // /api/Zaidimai/0/Category
         [Route("{id:int}/Category")]
         [HttpGet("bycategory")]
         public IEnumerable<Object> GetCategory(int id)
@@ -55,6 +76,8 @@ namespace E_Shop.Controllers
                 x.category
             }).ToList();
         }
+
+    
 
         [HttpPost("Add")]
         public async Task<IActionResult> AddZaidimai([FromBody]ZaidimaiDto zaidimai)
